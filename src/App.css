@@ -7,9 +7,15 @@
   pointer-events: none;
 }
 
-.body
+body
 {
-  font-family: poppins;
+  font-family: sans-serif;
+  height: 100vh;
+  /* background-image: linear-gradient( to right bottom, #321b383e, #dc8ea6 ), url('../../images/1.jpg'); */
+  background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('./images/1.jpg');
+  background-size: cover;
+  padding-top: 20px;
+  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
