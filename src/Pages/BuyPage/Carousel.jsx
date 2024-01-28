@@ -1,39 +1,36 @@
-import React, { Component } from "react";
-import Slider from "react-slick";
+import React, { useState } from 'react';
 
-export default class SimpleSlider extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: false,
-      speed: 0,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-    return (
-      <div>
-        <h2> Single Item</h2>
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-        </Slider>
-      </div>
+const CustomCarousel = ({ items }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? items.length - 1 : prevIndex - 1
     );
-  }
-}
+  };
+
+  return (
+    <div className="buy-page-carousel">
+     
+      <div className='carousel-left' onClick={handlePrev} >
+      <i class="fas fa-arrow-left"></i>
+      </div>
+
+    
+      {items[currentIndex]}
+      <div className='carousel-right' onClick={handleNext}>
+      <i class="fas fa-arrow-right"></i>
+      </div>
+      
+     
+
+   
+    </div>
+  );
+};
+
+export default CustomCarousel;
