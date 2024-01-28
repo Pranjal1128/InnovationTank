@@ -26,7 +26,6 @@ root.render(
   <Provider store={store}>
     <Router>
       <App />
-      <Allroutes />
     </Router>
   </Provider>
 );
