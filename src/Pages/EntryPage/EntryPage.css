@@ -16,7 +16,7 @@ body {
     grid-template-rows: repeat(5, 1fr);
     height: 100vh;
     /* background-image: linear-gradient( to right bottom, #321b383e, #dc8ea6 ), url('../../images/1.jpg'); */
-    background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('../../images/1.jpg');
+    background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('../../Assets/images/1.jpg');
     background-size: cover;
     padding-top: 20px;
 }

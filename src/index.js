@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import {thunk} from "redux-thunk";
 import { Provider } from "react-redux";
 import { HashRouter as Router } from "react-router-dom";
-import Allroutes from "./AllRoutes";
+// import Allroutes from "./AllRoutes";
 import "./App.css";
 import { reducers } from "./reducers";
 
@@ -26,7 +26,7 @@ root.render(
   <Provider store={store}>
     <Router>
       <App />
-      <Allroutes />
+      {/* <Allroutes /> */}
     </Router>
   </Provider>
 );
