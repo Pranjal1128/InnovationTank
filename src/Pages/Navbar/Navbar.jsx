@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import IcellLogo from "../../Assets/images/Icell4.png";
 import Logo from "../../Assets/images/i3_0.png";
-import { GrCircleInformation } from "react-icons/gr";
+import { HiOutlineInformationCircle } from "react-icons/hi";
 import { IoMdMenu } from "react-icons/io";
+import { FaHome } from "react-icons/fa";
+import { FaRankingStar } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({isModalOpen}) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-
   const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
   //   const closeInfoModal = () => setInfoModalOpen(false);
   
@@ -46,7 +49,7 @@ function Navbar() {
     <div>
       <div className="nav">
         <div onClick={openInfoModal}>
-          <GrCircleInformation className="info-btn" />
+          <HiOutlineInformationCircle className="info-btn" />
         </div>
         <div>
           <img src={IcellLogo} alt="Icell" width={30} />
@@ -89,10 +92,10 @@ function Navbar() {
           </div>
           <div className="menu">
             <div className="menu-options">
-              <a href="#Portfolio" className="menu-item">Home</a>
-              <a href="#Portfolio" className="menu-item"> Ranking</a>
-              <a href="#Portfolio" className="menu-item">User Portfolio</a>
-              <a href="#Portfolio" className="menu-item">Log Out</a>
+              <a href="#Portfolio" className="menu-item"><span><FaHome/></span><span>Home</span></a>
+              <a href="#Portfolio" className="menu-item"> <FaRankingStar/><span>Ranking</span></a>
+              <a href="#Portfolio" className="menu-item"><FaUser/><span>User Portfolio</span></a>
+              <a href="#Portfolio" className="menu-item"><FaSignOutAlt/><span>Log Out</span></a>
             </div>
             {/* <span onClick={openMenu} className="close-btn">
               &times;

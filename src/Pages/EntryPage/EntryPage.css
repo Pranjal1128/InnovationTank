@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
-
-body {
-    margin-top: 0;
-    font-family: 'poppins', sans-serif;
-}
-/* 
-.box {
-    backdrop-filter: blur(40px);
-} */
-
 .get-started {
     display: grid;
     grid-template-columns: 1fr;

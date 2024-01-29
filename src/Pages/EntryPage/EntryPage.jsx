@@ -15,7 +15,7 @@ const EntryPage = () => {
 
   return (
     <div className='box'>
-      <div className='get-started' style={{ textAlign: 'center', padding: '0 20px' }}>
+      <div className='get-started' style={{ textAlign: 'center', padding: '8px 20px' }}>
         {/* Your logo component */}
         <div className='logo-section'>
           <div className='logo-name'>
@@ -28,7 +28,7 @@ const EntryPage = () => {
           {/* Get Started button */}
           <button className='get-started-btn' onClick={handleGetStarted}>Get Started</button>
           {/* Terms & Conditions link */}
-          <p className='policy-content' style={{ marginTop: '10px', fontSize: '0.8em', color: '#fff' }}>
+          <p className='policy-content' style={{ fontSize: '0.8em', color: '#fff' }}>
               By clicking "Get Started," you agree to our{' '}
               <span style={{cursor: 'pointer' , fontWeight:'bold', color:'#fff'}} onClick={handleTermsAndConditions}>
               Terms of use, Privacy Policy

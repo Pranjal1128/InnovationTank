@@ -7,6 +7,7 @@ import Login from './Pages/LoginPage/Login';
 import ParticipantRanking from './Pages/ParticipantRanking/ParticipantRanking'
 import UserPortfolio from './Pages/UserPortfolio/UserPortfolio'
 import Portfolio from './Pages/Portfolios/Portfolio'
+import UserProfile from './Pages/UserProfile/UserProfile'
 
 
 const AllRoutes = () => {
@@ -19,7 +20,8 @@ const AllRoutes = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/ParticipantRanking" element={<ParticipantRanking />} />
         <Route path="/Portfolio" element={<Portfolio />} />
-        <Route path = "/UserPortfolio" element = {<UserPortfolio/>}  ></Route>
+        <Route path="/UserPortfolio" element={<UserPortfolio />}  ></Route>
+        <Route path='/UserProfile' element = {<UserProfile />} /> 
         </Routes>
     </div>
   )

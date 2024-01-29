@@ -43,10 +43,10 @@ function Login() {
         <div className="card">
           <form className="content">
             <h3>Sign In</h3>
-            <p>
+            <p className="form-name">
               <input type="text" placeholder="Name" ref={nameRef} />
             </p>
-            <p>
+            <p className="form-code">
               <input type="text" placeholder="Code" ref={codeRef} />
             </p>
             <button onClick={handleSubmit}>Sign In</button>

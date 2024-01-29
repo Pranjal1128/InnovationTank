@@ -1,0 +1,47 @@
+
+.user-profile {
+    width: 100vw;
+    height: 100vh;
+}
+.user-profile-chart-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.user-profile-chart-container > .doughnut-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-profile-chart-container > .bar-chart {
+    margin: 2rem;
+    overflow-x: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.user-profile-chart-container > .bar-chart::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+
+@media screen and (max-width : 900px) {
+    .user-profile-chart-container {
+        justify-content: space-around;
+        align-items: center;
+    }
+    .doughnut-chart > canvas {
+        height: 50vh !important;
+    }
+
+    .bar-chart > canvas {
+        height: 40vh !important;
+    }
+}
