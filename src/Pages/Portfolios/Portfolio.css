@@ -1,0 +1,28 @@
+.portfolio-section {
+    padding: 6.5rem 1rem 1rem 1rem;
+    height: 100%;
+    /* background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('../../Assets/images/1.jpg'); */
+    min-height: 100vh;
+    background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('../../Assets/images/1.jpg');
+    background-size: cover;
+}
+
+.portfolio-card {
+    color: #cccccc;
+    padding: 10px 10px 10px 16px;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    background: linear-gradient( to left top, #2222227c, #5a419b93 );
+    text-align:left;
+    margin-bottom: 28px;
+}
+
+.portfolio-card:last-child {
+    margin-bottom: 0;
+    /* padding-bottom: 20px; */
+}
+
+.card-heading {
+    display: inline-block;
+    margin: 2px 0;
+}

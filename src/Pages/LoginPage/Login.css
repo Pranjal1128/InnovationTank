@@ -1,5 +1,5 @@
 .entry {
-    font-family: poppins, 'sans-serif';
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,7 @@
     align-items: center;
     flex-wrap: wrap;
     z-index: 1;
-    background-image:url('./Icell4.png');
+    background-image:url('../../Assets/images/Icell4.png');
     background-size:contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -115,4 +115,34 @@
 
 .logos img {
     height : 70px;
+}
+/* 66e0b2 */
+/* 336ce2 */
+.powered {
+    color: #ffffff;
+    font-size: 14px;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.icell {
+    background: linear-gradient(to top, #66e0b2 15%, #3675cf 85%);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+@media(max-width: 389px) {
+    .powered {
+        font-size: 12px;
+    }
+}
+
+
+@media(max-width: 330px) {
+    .powered {
+        font-size: 10px;
+    }
 }

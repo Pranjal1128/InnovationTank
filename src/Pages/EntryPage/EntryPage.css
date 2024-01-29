@@ -3,6 +3,7 @@
 
 body {
     margin-top: 0;
+    font-family: 'poppins', sans-serif;
 }
 /* 
 .box {
@@ -10,7 +11,6 @@ body {
 } */
 
 .get-started {
-    font-family: poppins, 'sans-serif';
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
@@ -27,6 +27,11 @@ body {
     align-self: center;
     justify-self: center;
     margin-top: 4.5rem;
+}
+
+.app-logo {
+    width: 80px;
+    height: 80px;
 }
 
 .logo-name {
@@ -74,4 +79,22 @@ body {
 .get-started-btn:hover {
     background-color: #5a419b;
     color: #fff;
+}
+
+@media(max-width: 372px) {
+    .name {
+        font-size: 36px;
+    }
+
+    .app-logo {
+        scale: 0.9;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
+    }
+
+    .get-started-btn {
+        padding: 10px;
+    }
 }

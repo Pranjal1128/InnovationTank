@@ -19,7 +19,7 @@ const EntryPage = () => {
         {/* Your logo component */}
         <div className='logo-section'>
           <div className='logo-name'>
-            <img src={Logo} alt="Stocks Up Logo" style={{ width: '80px', height: '80px' }} />
+            <img className='app-logo' src={Logo} alt="Stocks Up Logo"/>
             <div className='name'>Stock's Up</div>
           </div>
           <p className='tagline'>Where Ideas Take Flight, Investors Unite!</p>

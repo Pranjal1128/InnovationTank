@@ -6,6 +6,7 @@ import Feed from './Pages/Feed/Feed'
 import Login from './Pages/LoginPage/Login';
 import ParticipantRanking from './Pages/ParticipantRanking/ParticipantRanking'
 import UserPortfolio from './Pages/UserPortfolio/UserPortfolio'
+import Portfolio from './Pages/Portfolios/Portfolio'
 
 
 const AllRoutes = () => {
@@ -17,6 +18,7 @@ const AllRoutes = () => {
         <Route path="/Feed" element={<Feed />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/ParticipantRanking" element={<ParticipantRanking />} />
+        <Route path="/Portfolio" element={<Portfolio />} />
         <Route path = "/UserPortfolio" element = {<UserPortfolio/>}  ></Route>
         </Routes>
     </div>

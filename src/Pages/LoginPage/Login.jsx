@@ -1,16 +1,18 @@
 import React from "react"; 
 import "./Login.css";
-// import {useNavigate} from "react-router-dom";
-// import {useDispatch, useSelector} from "react-redux";
-// import {isLoggedIn, login} from "../../actions/userActions.js";
-import logo from "./NITrr.png";
- 
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {isLoggedIn, login} from "../../actions/userActions.js";
+import { useRef } from "react";
+import { useEffect } from "react";
+import logo from "../../Assets/images/NITrr.png";
+
 function Login() {
-  // const navigate = useNavigate();
-  // const nameRef = useRef(null);
-  // const codeRef = useRef(null);
-  // const dispatch = useDispatch();
-  // const { isAuthenticated, error } = useSelector((state) => state.entryReducer);
+  const navigate = useNavigate();
+  const nameRef = useRef(null);
+  const codeRef = useRef(null);
+  const dispatch = useDispatch();
+  const { isAuthenticated, error } = useSelector((state) => state.authReducer);
 
   // useEffect(() => {
   //   if (isAuthenticated) {
@@ -23,15 +25,15 @@ function Login() {
   //   dispatch(isLoggedIn());
   // }, [isAuthenticated, error, dispatch, navigate]);
 
-  // const handleSubmit = (e) => {
-    // e.preventDefault();
-    // const name = nameRef.current.value;
-    // const code = codeRef.current.value;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const name = nameRef.current.value;
+    const code = codeRef.current.value;
 
-    // console.log(code, name);
-    // dispatch(login(code, name));
-  // };
-
+    console.log(code, name);
+    dispatch(login(code, name));
+  };
+ 
   return (
     <div className="entry">
       <div className="container">
@@ -42,15 +44,16 @@ function Login() {
           <form className="content">
             <h3>Sign In</h3>
             <p>
-              <input type="text" placeholder="Name" />
+              <input type="text" placeholder="Name" ref={nameRef} />
             </p>
             <p>
-              <input type="text" placeholder="Code" />
+              <input type="text" placeholder="Code" ref={codeRef} />
             </p>
-            <button>Sign In</button>
+            <button onClick={handleSubmit}>Sign In</button>
           </form>
         </div>
       </div>
+      <div className="powered">Powered by <span className="icell">Innovation Cell</span></div>
     </div>
   );
 }
