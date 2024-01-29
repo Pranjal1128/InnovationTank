@@ -9,10 +9,9 @@ import UserPortfolio from './Pages/UserPortfolio/UserPortfolio'
 import Portfolio from './Pages/Portfolios/Portfolio'
 import UserProfile from './Pages/UserProfile/UserProfile'
 
-
 const AllRoutes = () => {
   return (
-    <div>
+    <>
         <Routes>
         <Route path="/" element={<EntryPage />} />
         <Route path="/BuyPage" element={<BuyPage />} />
@@ -23,7 +22,7 @@ const AllRoutes = () => {
         <Route path="/UserPortfolio" element={<UserPortfolio />}  ></Route>
         <Route path='/UserProfile' element = {<UserProfile />} /> 
         </Routes>
-    </div>
+    </>
   )
 }
 
