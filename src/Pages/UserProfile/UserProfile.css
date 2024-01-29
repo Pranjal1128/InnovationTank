@@ -31,6 +31,74 @@
     background-color: transparent;
 }
 
+.user-profile-table {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.user-profile-table::-webkit-scrollbar {
+    height: 2px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+
+.user-profile-table::-webkit-scrollbar-thumb {
+    background-color: rgb(36, 170, 170);
+}
+
+.user-profile-table > table {
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.204);
+    padding: 1rem;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+
+
+.user-profile-table th{
+    padding: 1rem;
+    background-color: black;
+    text-align: left;
+}
+
+.user-profile-table th:first-of-type {
+    border-top-left-radius: 10px;
+}
+.user-profile-table th:last-of-type {
+    border-top-right-radius: 10px;
+}
+
+.user-profile-table tr:hover {
+    background-color: rgba(232, 231, 232, 0.6);
+}
+
+.user-profile-table td {
+    padding: 1rem;
+}
+
+
+.btn-container {
+    margin: 1rem 0rem;
+}
+
+.btn-container > button {
+    font-size: 1rem;
+    background: black;
+    padding: 0.5rem 1rem;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 1rem;
+}
+
+.btn-container > button:disabled {
+    cursor: not-allowed;
+    background-color: rgb(229, 229, 229);
+    color: rgba(0, 0, 0, 0.269);
+}
 
 @media screen and (max-width : 900px) {
     .user-profile-chart-container {
@@ -38,7 +106,7 @@
         align-items: center;
     }
     .doughnut-chart > canvas {
-        height: 50vh !important;
+        height: 45vh !important;
     }
 
     .bar-chart > canvas {
