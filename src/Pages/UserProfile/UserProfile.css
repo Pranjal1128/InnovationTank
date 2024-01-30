@@ -3,6 +3,10 @@
     width: 100vw;
     height: 100vh;
 }
+
+.user-profile > h1 {
+    margin: 1rem 0;
+}
 .user-profile-chart-container {
     display: flex;
     justify-content: space-between;
@@ -92,12 +96,49 @@
     border-radius: 10px;
     cursor: pointer;
     margin: 0 1rem;
+    
 }
 
 .btn-container > button:disabled {
     cursor: not-allowed;
     background-color: rgb(229, 229, 229);
     color: rgba(0, 0, 0, 0.269);
+}
+
+
+.user-profile-details {
+    padding: 0 5px;
+}
+.user-profile-details > div {
+    margin: 1rem 0;
+}
+.user-profile-details > div > p {
+    margin: 4px 0;
+    width: fit-content;
+    padding: 1rem;
+    background: rgba( 255, 255, 255, 0 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.user-profile-details > div:first-child > p {
+    margin: auto;
+    border-radius: 10px;
+}
+
+.user-profile-details > div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.user-profile-details > div:last-child {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 @media screen and (max-width : 900px) {
