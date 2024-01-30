@@ -7,6 +7,7 @@ import Login from './Pages/LoginPage/Login';
 import ParticipantRanking from './Pages/ParticipantRanking/ParticipantRanking'
 import UserPortfolio from './Pages/UserPortfolio/UserPortfolio'
 import UserProfile from './Pages/UserProfile/UserProfile'
+import AudienceRanking from './Pages/AudienceRanking/AudienceRanking'
 
 
 const AllRoutes = () => {
@@ -20,6 +21,7 @@ const AllRoutes = () => {
         <Route path="/ParticipantRanking" element={<ParticipantRanking />} />
         <Route path="/UserPortfolio" element={<UserPortfolio />}  ></Route>
         <Route path='/UserProfile' element = {<UserProfile />} /> 
+        <Route path='/AudienceRanking' element = {<AudienceRanking />} /> 
         </Routes>
     </div>
   )
