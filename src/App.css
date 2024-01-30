@@ -12,4 +12,9 @@ body
   background-repeat: no-repeat;
   color: white;
   height: 100%;
+  /* backdrop-filter: blur(6px); */
+}
+
+.App{
+  height: 100%;
 }

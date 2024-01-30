@@ -9,16 +9,22 @@ import { FaRankingStar } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 
-function Navbar({isModalOpen}) {
+function Navbar({onDataChange}) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
+  // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
   //   const closeInfoModal = () => setInfoModalOpen(false);
   
+  const openInfoModal = () => {
+    // const newData = event.target.value;
+    setInfoModalOpen(!isInfoModalOpen);
+
+    // Call the callback function to update parent state
+    onDataChange(isInfoModalOpen);
+  };
 
   const openMenu = () => setMenuOpen(!isMenuOpen);
   //   const closeMenu = () => setMenuOpen(false);
-
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -61,7 +67,7 @@ function Navbar({isModalOpen}) {
 
       {/* Info Modal */}
       {isInfoModalOpen && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" style={{filter:"blur(0) !important"}}>
           <div className="modal">
             <div className="modal-header">
               <h2>Instructions</h2>
