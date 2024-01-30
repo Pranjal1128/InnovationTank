@@ -13,10 +13,12 @@ const columns = [
   {
     Header: "S.NO. ",
     accessor: "sno",
+    disableSortBy: true,
   },
   {
     Header: "Startups",
     accessor: "startup",
+    disableSortBy: true,
   },
   {
     Header: "Quantity",
@@ -29,6 +31,7 @@ const columns = [
   {
     Header: "Multiplier",
     accessor: "multiplier",
+    disableSortBy: true,
   },
   {
     Header: "Curr_Worth",
