@@ -6,7 +6,7 @@
     gap: 10px;
     min-height: 100vh;
     /* background-image: linear-gradient( to right bottom, #321b383e, #dc8ea6 ), url('../../images/1.jpg'); */
-    background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('../../images/1.jpg');
+    background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('../../Assets/images/1.jpg');
     background-size: cover;
     flex-direction: column;
 }
@@ -19,7 +19,7 @@
     align-items: center;
     flex-wrap: wrap;
     z-index: 1;
-    background-image:url('./Icell4.png');
+    background-image:url('../../Assets/images/Icell4.png');
     background-size:contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -70,12 +70,14 @@
     font-size: 1.8em;
     color: #fff;
     z-index: 1;
+    margin-bottom: 24px;
 }
 
 .container .card .content p {
     font-size: 1em;
     color: #fff;
     font-weight: 300;
+    margin-bottom: 12px;
 }
 
 .container .card .content button {
@@ -115,4 +117,34 @@
 
 .logos img {
     height : 70px;
+}
+/* 66e0b2 */
+/* 336ce2 */
+.powered {
+    color: #ffffff;
+    font-size: 14px;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.icell {
+    background: linear-gradient(to top, #66e0b2 15%, #3675cf 85%);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+@media(max-width: 389px) {
+    .powered {
+        font-size: 12px;
+    }
+}
+
+
+@media(max-width: 330px) {
+    .powered {
+        font-size: 10px;
+    }
 }

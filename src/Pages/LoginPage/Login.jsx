@@ -5,8 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {isLoggedIn, login} from "../../actions/userActions.js";
 import { useRef } from "react";
 import { useEffect } from "react";
-import logo from "./NITrr.png";
- 
+import logo from "../../Assets/images/NITrr.png";
+
 function Login() {
   const navigate = useNavigate();
   const nameRef = useRef(null);
@@ -43,16 +43,17 @@ function Login() {
         <div className="card">
           <form className="content">
             <h3>Sign In</h3>
-            <p>
+            <p className="form-name">
               <input type="text" placeholder="Name" ref={nameRef} />
             </p>
-            <p>
+            <p className="form-code">
               <input type="text" placeholder="Code" ref={codeRef} />
             </p>
             <button onClick={handleSubmit}>Sign In</button>
           </form>
         </div>
       </div>
+      <div className="powered">Powered by <span className="icell">Innovation Cell</span></div>
     </div>
   );
 }
