@@ -15,12 +15,8 @@ import { useNavigate } from "react-router-dom";
 function Navbar({onDataChange}) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-<<<<<<< HEAD
-  const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
   const navigate = useNavigate()
-=======
   // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
->>>>>>> ca3e206dfefa1c857e99047fb546041c125c5a52
   //   const closeInfoModal = () => setInfoModalOpen(false);
   const Logout = () => {
 
