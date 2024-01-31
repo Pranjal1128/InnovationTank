@@ -10,8 +10,6 @@ import { FaUser } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Navbar({onDataChange}) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
