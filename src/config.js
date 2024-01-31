@@ -1,0 +1,1 @@
+const backend_url = "https://stocksup.onrender.com"

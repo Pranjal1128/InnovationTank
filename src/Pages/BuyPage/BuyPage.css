@@ -5,7 +5,7 @@
     grid-template-rows: repeat(5, 1fr);
     background-image: linear-gradient( to bottom, #5a419b3e, #222222 ), url('../../Assets/images/1.jpg');
     background-size: cover;
-    padding-top: 20px;
+    /* padding-top: 20px; */
 }
 
 .buy-page-details{
@@ -15,14 +15,14 @@
     height: 70vh;
     background-color: #b29de73e;
     color : white;
-    width: 80%;
+    width: 90%;
     margin: auto;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
-    margin-top: 50px;
+    margin-top: 70px;
     align-items: center;
 }
 
@@ -30,7 +30,7 @@
     max-width: 90%;
     width: 90%;
 
-    height: 70%;
+    height: 80%;
     align-items: center;
     justify-content: space-between;
 } 
@@ -43,7 +43,12 @@
 .buy-page-details h2 {
 text-align: center;
 width: 100%;
+margin-top: 25px;
 }
+
+.buy-amount::placeholder {
+    color: #6c37f3 ; /* Change this to the desired darkened color */
+  }
 
 .buy-page-input button {
     background-color: #5a419b;

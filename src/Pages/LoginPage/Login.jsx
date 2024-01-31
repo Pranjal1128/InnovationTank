@@ -14,16 +14,16 @@ function Login() {
   const dispatch = useDispatch();
   const { isAuthenticated, error } = useSelector((state) => state.authReducer);
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     navigate("/portfolios");
-  //   }
-  //   if (error) {
-  //     alert(error);
-  //   }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/Portfolio");
+    }
+    if (error) {
+      alert(error);
+    }
 
-  //   dispatch(isLoggedIn());
-  // }, [isAuthenticated, error, dispatch, navigate]);
+    dispatch(isLoggedIn());
+  }, [isAuthenticated, error, dispatch, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
