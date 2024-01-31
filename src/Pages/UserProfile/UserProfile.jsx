@@ -13,10 +13,12 @@ const columns = [
   {
     Header: "S.NO. ",
     accessor: "sno",
+    disableSortBy: true,
   },
   {
     Header: "Startups",
     accessor: "startup",
+    disableSortBy: true,
   },
   {
     Header: "Quantity",
@@ -29,6 +31,7 @@ const columns = [
   {
     Header: "Multiplier",
     accessor: "multiplier",
+    disableSortBy: true,
   },
   {
     Header: "Curr_Worth",
@@ -49,17 +52,30 @@ const UserProfile = () => {
     ],
   });
 
-  const { getTableBodyProps, getTableProps, headerGroups, page, prepareRow, nextPage, previousPage, canPreviousPage, canNextPage, state: {pageIndex}, pageCount } =
-    useTable(
-      {
-        columns,
-        data: tableData,
-      },
-      useSortBy, usePagination
-    );
+  const {
+    getTableBodyProps,
+    getTableProps,
+    headerGroups,
+    page,
+    prepareRow,
+    nextPage,
+    previousPage,
+    canPreviousPage,
+    canNextPage,
+    state: { pageIndex },
+    pageCount,
+  } = useTable(
+    {
+      columns,
+      data: tableData,
+    },
+    useSortBy,
+    usePagination
+  );
 
   return (
     <div className="user-profile">
+      <h1>Your Profile</h1>
       <div className="user-profile-chart-container">
         <div className="doughnut-chart">
           <Doughnut options={{ responsive: true }} data={chartData} />
@@ -100,10 +116,30 @@ const UserProfile = () => {
         </table>
       </div>
       <div className="btn-container">
-          <button disabled={!canPreviousPage} onClick={previousPage}>Prev</button>
-          <span>{ pageIndex+1 } of { pageCount }</span>
-          <button disabled={!canNextPage} onClick={nextPage}>Next</button>
+        <button disabled={!canPreviousPage} onClick={previousPage}>
+          Prev
+        </button>
+        <span>
+          {pageIndex + 1} of {pageCount}
+        </span>
+        <button disabled={!canNextPage} onClick={nextPage}>
+          Next
+        </button>
+      </div>
+
+      <div className="user-profile-details">
+        <div>
+          <p>Final Worth - 34$</p>
         </div>
+        <div>
+          <p>money invested - 34$</p>
+          <p>Total Stocks - 34$</p>
+        </div>
+        <div>
+          <p>Profit - 34$</p>
+          <p>Loss - 34$</p>
+        </div>
+      </div>
     </div>
   );
 };

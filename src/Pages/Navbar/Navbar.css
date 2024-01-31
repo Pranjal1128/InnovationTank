@@ -40,9 +40,12 @@
 
 .modal-overlay {
     position: absolute;
+    filter:blur(0px);
     width: 85%;
     left: 50%;
     top: 20px;
+
+    z-index: 999;
     transform: translate(-50% ,150px);
     border-radius: 20px;
 }

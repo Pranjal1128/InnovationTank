@@ -12,5 +12,13 @@ body
   background-repeat: no-repeat;
   color: white;
   height: 100%;
+<<<<<<< HEAD
   min-height: 100vh;
+=======
+  /* backdrop-filter: blur(6px); */
+}
+
+.App{
+  height: 100%;
+>>>>>>> ca3e206dfefa1c857e99047fb546041c125c5a52
 }

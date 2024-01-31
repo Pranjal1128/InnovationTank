@@ -8,11 +8,11 @@ import ParticipantRanking from './Pages/ParticipantRanking/ParticipantRanking'
 import UserPortfolio from './Pages/UserPortfolio/UserPortfolio'
 import Portfolio from './Pages/Portfolios/Portfolio'
 import UserProfile from './Pages/UserProfile/UserProfile'
-
+import AudienceRanking from './Pages/AudienceRanking/AudienceRanking'
 
 const AllRoutes = () => {
   return (
-    <div>
+    <>
         <Routes>
         <Route path="/" element={<EntryPage />} />
         <Route path="/Buy/:id" element={<BuyPage />} />
@@ -22,8 +22,9 @@ const AllRoutes = () => {
         <Route path="/Portfolio" element={<Portfolio />} />
         <Route path="/UserPortfolio" element={<UserPortfolio />}  ></Route>
         <Route path='/UserProfile' element = {<UserProfile />} /> 
+        <Route path='/AudienceRanking' element = {<AudienceRanking />} /> 
         </Routes>
-    </div>
+    </>
   )
 }
 

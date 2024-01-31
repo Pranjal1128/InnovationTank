@@ -12,11 +12,15 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function Navbar({isModalOpen}) {
+function Navbar({onDataChange}) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+<<<<<<< HEAD
   const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
   const navigate = useNavigate()
+=======
+  // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
+>>>>>>> ca3e206dfefa1c857e99047fb546041c125c5a52
   //   const closeInfoModal = () => setInfoModalOpen(false);
   const Logout = () => {
 
@@ -28,10 +32,16 @@ navigate("/")
     
   }
   
+  const openInfoModal = () => {
+    // const newData = event.target.value;
+    setInfoModalOpen(!isInfoModalOpen);
+
+    // Call the callback function to update parent state
+    onDataChange(isInfoModalOpen);
+  };
 
   const openMenu = () => setMenuOpen(!isMenuOpen);
   //   const closeMenu = () => setMenuOpen(false);
-
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -75,7 +85,7 @@ navigate("/")
 
       {/* Info Modal */}
       {isInfoModalOpen && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" style={{filter:"blur(0) !important"}}>
           <div className="modal">
             <div className="modal-header">
               <h2>Instructions</h2>
