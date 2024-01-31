@@ -8,12 +8,29 @@ import { FaHome } from "react-icons/fa";
 import { FaRankingStar } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
+
 
 function Navbar({onDataChange}) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+<<<<<<< HEAD
+  const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
+  const navigate = useNavigate()
+=======
   // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
+>>>>>>> ca3e206dfefa1c857e99047fb546041c125c5a52
   //   const closeInfoModal = () => setInfoModalOpen(false);
+  const Logout = () => {
+
+localStorage.removeItem('icell_pitcher_code');
+
+
+localStorage.removeItem('icell_pitcher_userId');
+navigate("/")
+    
+  }
   
   const openInfoModal = () => {
     // const newData = event.target.value;
@@ -44,6 +61,7 @@ function Navbar({onDataChange}) {
       }
     };
 
+ 
     window.addEventListener("click", handleOutsideClick);
 
     return () => {
@@ -101,7 +119,7 @@ function Navbar({onDataChange}) {
               <a href="#Portfolio" className="menu-item"><span><FaHome/></span><span>Home</span></a>
               <a href="#Portfolio" className="menu-item"> <FaRankingStar/><span>Ranking</span></a>
               <a href="#Portfolio" className="menu-item"><FaUser/><span>User Portfolio</span></a>
-              <a href="#Portfolio" className="menu-item"><FaSignOutAlt/><span>Log Out</span></a>
+              <a onClick={()=> Logout()}  className="menu-item"><FaSignOutAlt/><span>Log Out</span></a>
             </div>
             {/* <span onClick={openMenu} className="close-btn">
               &times;
