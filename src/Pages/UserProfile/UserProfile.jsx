@@ -136,8 +136,8 @@ const UserProfile = () => {
           <p>Total Stocks - 34$</p>
         </div>
         <div>
-          <p>Profit - 34$</p>
-          <p>Loss - 34$</p>
+          <p className="profit">Profit - 34$</p>
+          <p className="loss">Loss - 34$</p>
         </div>
       </div>
     </div>

@@ -32,6 +32,8 @@ const BuyPage = () => {
   const [name, setName] = useState();
   const [leader, setLeader] = useState();
   const [stocks, setStocks] = useState();
+  const [navChange, setNavChange] = useState(true);
+
 
   const comp1 = () => {
     return <p style={{ textAlign: "center" }}>{bio}</p>;
@@ -123,19 +125,25 @@ const BuyPage = () => {
     }
   }, [id, projects]);
 
+  const handleNavChange = (data) => {
+    setNavChange(data);
+  };
+
   const carouselItems = [comp1(), comp2()];
 
   return (
     <div className="buy-page">
-      <Navbar />
-      <div className="buy-page-details">
+      <div style={{position:"relative", zIndex:"2"}}>
+        <Navbar onDataChange={handleNavChange}/>
+      </div>
+      <div className="buy-page-details" style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         <h2>{name}</h2>
         {/* <p>{bio}</p>
         <p>{leader}</p> */}
         <Carousel items={carouselItems} />
       </div>
       <p id="stock">12</p>
-      <div className="buy-page-input">
+      <div className="buy-page-input" style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         <p>
           <input
             type="text"

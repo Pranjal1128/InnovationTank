@@ -9,6 +9,7 @@ import UserPortfolio from './Pages/UserPortfolio/UserPortfolio'
 import Portfolio from './Pages/Portfolios/Portfolio'
 import UserProfile from './Pages/UserProfile/UserProfile'
 import AudienceRanking from './Pages/AudienceRanking/AudienceRanking'
+import { IoMdPower } from 'react-icons/io'
 
 const AllRoutes = () => {
   return (
@@ -21,7 +22,7 @@ const AllRoutes = () => {
         <Route path="/ParticipantRanking" element={<ParticipantRanking />} />
         <Route path="/Portfolio" element={<Portfolio />} />
         <Route path="/UserPortfolio" element={<UserPortfolio />}  ></Route>
-        <Route path='/UserProfile' element = {<UserProfile />} /> 
+        <Route path='/UserProfile' element = {<UserProfile />} />  
         <Route path='/AudienceRanking' element = {<AudienceRanking />} /> 
         </Routes>
     </>
