@@ -1,18 +1,21 @@
 
 
 .audience-ranking {
-
+    width: 100%;
+    min-height: 100vh;
 }
 
 .audience-ranking > h1 {
     margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .audience-ranking-table {
-    width: 100%;
-    height: 80vh;
+    
     overflow-x: scroll;
-
+    margin: 1rem;
 }
 
 .audience-ranking-table::-webkit-scrollbar {
@@ -30,7 +33,8 @@
     padding: 1rem;
     border-collapse: collapse;
     overflow-x: auto;
-    min-height: 80vh;
+    height: 80vh;
+    width: 100%;
 
 }
 
@@ -38,8 +42,12 @@
 
 .audience-ranking-table th{
     padding: 1rem;
-    background-color: black;
     text-align: left;
+
+    background: rgba( 255, 255, 255, 0.2 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
 }
 
 .audience-ranking-table th:first-of-type {
