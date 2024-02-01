@@ -111,8 +111,9 @@ navigate("/")
           <div className="menu">
             <div className="menu-options">
               <a href="#Portfolio" className="menu-item"><span><FaHome/></span><span>Home</span></a>
-              <a href="#Portfolio" className="menu-item"> <FaRankingStar/><span>Ranking</span></a>
-              <a href="#Portfolio" className="menu-item"><FaUser/><span>User Portfolio</span></a>
+              <a href="#AudienceRanking" className="menu-item"> <FaRankingStar/><span>Audience Ranking</span></a>
+              <a href="#ParticipantRanking" className="menu-item"> <FaRankingStar/><span> Participant Ranking</span></a>
+              <a href="#UserProfile" className="menu-item"><FaUser/><span>User Portfolio</span></a>
               <a onClick={()=> Logout()}  className="menu-item"><FaSignOutAlt/><span>Log Out</span></a>
             </div>
             {/* <span onClick={openMenu} className="close-btn">

@@ -138,8 +138,7 @@ const BuyPage = () => {
       </div>
       <div className="buy-page-details" style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         <h2>{name}</h2>
-        {/* <p>{bio}</p>
-        <p>{leader}</p> */}
+      
         <Carousel items={carouselItems} />
       </div>
       <p id="stock">12</p>
