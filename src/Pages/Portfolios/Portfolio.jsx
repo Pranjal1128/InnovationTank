@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import { getPortfolio } from '../../actions/portfolio';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FaUserCircle } from "react-icons/fa";
+import { GiReceiveMoney } from "react-icons/gi";
+import { FaDiagramProject } from "react-icons/fa6";
 
 function Portfolio() {
   const [allProjects, setAllProjects] = useState([{name : "name",leader:"leader",about:"about"}]);
@@ -43,14 +46,17 @@ function Portfolio() {
       <div className='portfolio-section' style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         {allProjects.map((project) => (
           <div key={project.id} onClick={() => handleSubmit(project._id)} className='portfolio-card'>
-            <div>
-              <h4 className='card-heading'>Project Name</h4> : {project.name}
+            <div className='card-content'>
+              <div><FaDiagramProject/></div>
+              <div><h4 className='card-heading'>Project Name</h4> : {project.name}</div>
             </div>
-            <div>
-              <h4 className='card-heading'>Team Leader</h4> : {project.leader}
+            <div className='card-content'>
+              <div><FaUserCircle/></div>
+              <div><h4 className='card-heading'>Team Leader</h4> : {project.leader}</div>
             </div>
-            <div>
-              <h4 className='card-heading'>Stocks Left</h4> : {project.stock}
+            <div className='card-content'>
+              <div><GiReceiveMoney/></div>
+              <div><h4 className='card-heading'>Stocks Left</h4> : {project.stock}</div>
             </div>
           </div>
         ))}
