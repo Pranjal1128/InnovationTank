@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const CustomCarousel = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,20 +15,14 @@ const CustomCarousel = ({ items }) => {
 
   return (
     <div className="buy-page-carousel">
-     
-      <div className='carousel-left' onClick={handlePrev} >
-      <i class="fas fa-arrow-left"></i>
+      <div className="carousel-left" onClick={handlePrev}>
+        <i class="fas fa-arrow-left"></i>
       </div>
 
-    
       {items[currentIndex]}
-      <div className='carousel-right' onClick={handleNext}>
-      <i class="fas fa-arrow-right"></i>
+      <div className="carousel-right" onClick={handleNext}>
+        <i class="fas fa-arrow-right"></i>
       </div>
-      
-     
-
-   
     </div>
   );
 };
