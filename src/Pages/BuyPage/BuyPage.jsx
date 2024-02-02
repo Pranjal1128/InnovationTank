@@ -103,7 +103,7 @@ const BuyPage = () => {
       navigate("/Portfolio");
     });
 
-    setCarouselItems([<LineChart1 socket={socket} /> ,comp1(), comp2()])
+    setCarouselItems([<LineChart1 portfolio_id = {id} socket={socket} /> ,comp1(), comp2()])
     return () => {
       console.log("socket disconnecg");
       socket.disconnect();

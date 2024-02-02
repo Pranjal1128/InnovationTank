@@ -1,14 +1,18 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import { backend_url } from "../../config";
+import { useSelector } from "react-redux";
 
 function generateTimeIntervals(currentTime) {
   const endDate = new Date(`2024-02-01 ${currentTime}`);
   return endDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-const LineChart1 = ({ socket }) => {
+const LineChart1 = ({ portfolio_id,socket }) => {
   const [label, setLabel] = useState([]);
   const [lineLabel, setLineLabel] = useState([]);
+
 
 
   console.log("lable is ", label);
@@ -17,7 +21,17 @@ const LineChart1 = ({ socket }) => {
 
 
 
-
+  // for making fetch request
+  useEffect(() => {
+    axios.post(`${backend_url}/portfolios/data/line-chart`, {
+      portfolio_id
+    }).then(({ data }) => {
+      setLabel(data.x);
+      setLineLabel(data.lineData)
+    })
+  }, [])
+  
+  // for making socket connection
   useEffect(() => {
 
     const generateLable = (data) => {
