@@ -131,6 +131,7 @@ body {
     top: 0;
     right: 0;
     border-radius: 10px;
+    border: none;
     position: absolute;
     top: 86px;
     right: 14px;

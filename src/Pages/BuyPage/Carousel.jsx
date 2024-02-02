@@ -26,9 +26,9 @@ const CustomCarousel = ({ items }) => {
       <i class="fas fa-arrow-right"></i>
       </div>
       
-     
 
-   
+
+
     </div>
   );
 };
