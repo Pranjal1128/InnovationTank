@@ -60,11 +60,11 @@ const BuyPage = () => {
     // socket = io("http://localhost:5000");
     console.log("useeffect");
 
-    // userId = localStorage.getItem("icell_pitcher_userId")
+    userId = localStorage.getItem("icell_pitcher_userId")
     //   ? JSON.parse(localStorage.getItem("icell_pitcher_userId"))
     //   : null;
 
-    userId = "65b4dc4977e3ce51c67cc98d";
+
     console.log(userId);
     socket.on("connect", () => {
       console.log("Socket is connected (frontend)");
