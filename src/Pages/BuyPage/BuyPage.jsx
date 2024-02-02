@@ -145,8 +145,8 @@ const BuyPage = () => {
       <div className="buy-page-input" style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         <p>
           <input
-            type="text"
-            placeholder={`Enter Amount/${stocks}`}
+            type="number"
+            placeholder={`Enter Amount / ${stocks}`}
             className="buy-amount"
             ref={buyRef}
           />

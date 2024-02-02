@@ -16,6 +16,7 @@ function Navbar({onDataChange}) {
   const navigate = useNavigate()
   // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
   //   const closeInfoModal = () => setInfoModalOpen(false);
+  const moneyLeft = 12;
   const Logout = () => {
 
 localStorage.removeItem('icell_pitcher_code');
@@ -120,6 +121,7 @@ navigate("/")
               &times;
             </span> */}
           </div>
+          <button className="balance">Balance: <span className="amount">${moneyLeft}</span></button>
           <div className="powered-menu">
             Powered by <span className="icell-menu">Innovation Cell</span>
           </div>
