@@ -39,7 +39,7 @@
 }
 
 .modal-overlay {
-    position: absolute;
+    position: fixed;
     filter:blur(0px);
     width: 85%; 
     left: 50%;

@@ -65,7 +65,7 @@ navigate("/")
   }, [isInfoModalOpen, isMenuOpen]);
 
   return (
-    <div>
+    <>
       <div className="nav">
         <div onClick={openInfoModal}>
           <HiOutlineInformationCircle className="info-btn" />
@@ -127,7 +127,7 @@ navigate("/")
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
