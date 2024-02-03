@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getPortfolio } from "../../actions/portfolio";
 import Navbar from "../Navbar/Navbar";
-
+import LineChart1 from "./LineChart1";
 import { ToastCallError, ToastCallSuccess } from "../../ReactToast";
 import { io } from "socket.io-client";
 import { backend_url } from "../../config";
@@ -15,10 +15,7 @@ const comp2 = () => {
   return <p>hi there.</p>;
 };
 
-const displayStock = (stock) => {
-  let div = document.getElementById("stock");
-  div.textContent = stock;
-};
+
 let socket;
 let userId;
 
@@ -33,8 +30,8 @@ const BuyPage = () => {
   const [leader, setLeader] = useState();
   const [stocks, setStocks] = useState();
   const [navChange, setNavChange] = useState(true);
-
-
+  const [userMoney,setUserMoney] = useState(0);
+  let [carouselItems, setCarouselItems] = useState([]);
   const comp1 = () => {
     return <p style={{ textAlign: "center" }}>{bio}</p>;
   };
@@ -60,35 +57,42 @@ const BuyPage = () => {
     // socket = io("http://localhost:5000");
     console.log("useeffect");
 
-    // userId = localStorage.getItem("icell_pitcher_userId")
+    userId = localStorage.getItem("icell_pitcher_userId")
     //   ? JSON.parse(localStorage.getItem("icell_pitcher_userId"))
     //   : null;
+    userId = localStorage.getItem("icell_pitcher_userId")
+      ? JSON.parse(localStorage.getItem("icell_pitcher_userId"))
+      : null;
 
-    userId = "65b4dc4977e3ce51c67cc98d";
+
     console.log(userId);
     socket.on("connect", () => {
       console.log("Socket is connected (frontend)");
     });
+
+
     socket.emit("join-room", id);
+
+
     socket.emit("getStock", id, userId, (getData) => {
-      displayStock(getData[0]);
-      console.log("init stocks ", getData[0])
       setStocks(getData[0]);
+      setUserMoney(getData[1]);
     });
 
     socket.on("show-stock", (stock) => {
-      console.log("show-stock ", stock);
-      displayStock(stock[0]);
+      setStocks(stock[0]);
+      setUserMoney(stock[1]);
     });
 
-    socket.on("stock-empty", () => {
-      console.log("stock empty working");
-      ToastCallError("stock empty");
-    });
     socket.on("userStock-empty", () => {
-      console.log("stock empty working");
       ToastCallError("Dont have enough Stock ");
     });
+
+
+    socket.on("stock-empty", () => {
+      ToastCallError("stock empty");
+    });
+
 
     socket.on("successfully-purchased", (purchasedProd) => {
       ToastCallSuccess(`Successfully Purchased ${purchasedProd} stocks`);
@@ -96,11 +100,10 @@ const BuyPage = () => {
 
     socket.on("disconnect", function () {
       console.log("Got disconnect!");
-      // setInterval(() => {
-      //   console.log("set interval");
-      // }, 5000);
-      navigate("/portfolios");
+      navigate("/Portfolio");
     });
+
+    setCarouselItems([<LineChart1 portfolio_id = {id} socket={socket} /> ,comp1(), comp2()])
     return () => {
       console.log("socket disconnecg");
       socket.disconnect();
@@ -129,7 +132,8 @@ const BuyPage = () => {
     setNavChange(data);
   };
 
-  const carouselItems = [comp1(), comp2()];
+
+  // const carouselItems = [<LineChart1 socket={socket} /> ,comp1(), comp2()];
 
   return (
     <div className="buy-page">

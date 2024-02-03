@@ -15,7 +15,7 @@ function Navbar({onDataChange}) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
   // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
-  //   const closeInfoModal = () => setInfoModalOpen(false);
+  // const closeInfoModal = () => setInfoModalOpen(false);
   const moneyLeft = 12;
   const Logout = () => {
 
