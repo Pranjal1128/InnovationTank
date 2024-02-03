@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getPortfolio } from "../../actions/portfolio";
+import Navbar from "../Navbar/Navbar";
 import LineChart1 from "./LineChart1";
 import { ToastCallError, ToastCallSuccess } from "../../ReactToast";
 import { io } from "socket.io-client";
@@ -28,6 +29,7 @@ const BuyPage = () => {
   const [name, setName] = useState();
   const [leader, setLeader] = useState();
   const [stocks, setStocks] = useState();
+  const [navChange, setNavChange] = useState(true);
   const [userMoney,setUserMoney] = useState(0);
   let [carouselItems, setCarouselItems] = useState([]);
   const comp1 = () => {
@@ -126,17 +128,25 @@ const BuyPage = () => {
     }
   }, [id, projects]);
 
+  const handleNavChange = (data) => {
+    setNavChange(data);
+  };
+
+
   // const carouselItems = [<LineChart1 socket={socket} /> ,comp1(), comp2()];
 
   return (
     <div className="buy-page">
-      <div className="buy-page-details">
+      <div style={{position:"relative", zIndex:"2"}}>
+        <Navbar onDataChange={handleNavChange}/>
+      </div>
+      <div className="buy-page-details" style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         <h2>{name}</h2>
       
         <Carousel items={carouselItems} />
       </div>
       <p id="stock">12</p>
-      <div className="buy-page-input">
+      <div className="buy-page-input" style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         <p>
           <input
             type="number"

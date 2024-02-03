@@ -15,7 +15,7 @@ function Navbar({onDataChange}) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
   // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
-  // const closeInfoModal = () => setInfoModalOpen(false);
+  //   const closeInfoModal = () => setInfoModalOpen(false);
   const moneyLeft = 12;
   const Logout = () => {
 
@@ -65,7 +65,7 @@ navigate("/")
   }, [isInfoModalOpen, isMenuOpen]);
 
   return (
-    <>
+    <div>
       <div className="nav">
         <div onClick={openInfoModal}>
           <HiOutlineInformationCircle className="info-btn" />
@@ -127,7 +127,7 @@ navigate("/")
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
