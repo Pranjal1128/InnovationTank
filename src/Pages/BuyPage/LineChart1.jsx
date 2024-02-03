@@ -19,7 +19,7 @@ const LineChart1 = ({ portfolio_id,socket }) => {
   console.log("lineLable is ", lineLabel);
 
 
-
+  
 
   // for making fetch request
   useEffect(() => {
