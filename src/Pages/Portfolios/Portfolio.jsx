@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Portfolio.css';
+import NavBar from '../Navbar/Navbar';
 import { useDispatch } from 'react-redux';
 import { getPortfolio } from '../../actions/portfolio';
 import { useSelector } from 'react-redux';
@@ -10,6 +11,7 @@ import { FaDiagramProject } from "react-icons/fa6";
 
 function Portfolio() {
   const [allProjects, setAllProjects] = useState([{name : "name",leader:"leader",about:"about"}]);
+  const [navChange, setNavChange] = useState(true);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -32,9 +34,16 @@ function Portfolio() {
     }
   }, [posts]);
 
+  const handleNavChange = (data) => {
+    setNavChange(data);
+  };
+
   return (
-    <div>
-      <div className='portfolio-section'>
+    <div style={{ position: "relative", height: "100%", backdropFilter: navChange ? "blur(0)" : "blur(2px)" }}>
+      <div style={{position:"relative", zIndex:"2"}}>
+        <NavBar onDataChange={handleNavChange}/>
+      </div>
+      <div className='portfolio-section' style={{filter: navChange ? "blur(0)" : "blur(2px)" }}>
         {allProjects.map((project) => (
           <div key={project.id} onClick={() => handleSubmit(project._id)} className='portfolio-card'>
             <div className='card-content'>
