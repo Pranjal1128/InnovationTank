@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./UserProfile.css";
-import { Data, generateRandomColor, tableData } from "./utils";
+import { Data, generateRandomColor } from "./utils";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut, Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import { useTable, useSortBy, usePagination } from "react-table";
+import { backend_url } from "../../config.js";
 
 Chart.register(...registerables);
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -40,18 +42,22 @@ const columns = [
 ];
 
 const UserProfile = () => {
-  const [chartData, setChartData] = useState({
-    labels: Data.map((data) => data.year),
+  const [boughtStocks, setBoughtStocks] = useState([]);
+  const [startupNames, setStartupNames] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const chartData = {
+    labels: startupNames, // total startup name
     datasets: [
       {
-        label: "Users Gained ",
-        data: Data.map((data) => data.userGain),
-        backgroundColor: generateRandomColor(Data.length),
+        label: "Bar Chart ",
+        data: boughtStocks, //bought stock
+        backgroundColor: generateRandomColor(startupNames.length),
         hoverOffset: 4,
       },
     ],
-  });
+  };
 
+  console.log("chatData:");
   const {
     getTableBodyProps,
     getTableProps,
@@ -73,6 +79,32 @@ const UserProfile = () => {
     usePagination
   );
 
+  useEffect(() => {
+    console.log("token", localStorage.getItem("icell_pitcher_code"));
+    axios
+      .post(`${backend_url}/api/v1/user/buy/details`, {
+        token: localStorage.getItem("icell_pitcher_code").slice(1, -1),
+      })
+      .then(({ data }) => {
+        setBoughtStocks(data.buyStartupStocks);
+        setStartupNames(data.startupsName);
+
+        let table = [];
+        let len = data.buyStartupStocks.length;
+        for (let i = 0; i < len; i++) {
+          table.push({
+            sno: i+1,
+            startup: data.startupsName[i],
+            quantity: data.buyStartupStocks[i],
+            percent: 94,
+            multiplier: 52,
+            curr_worth: 27,
+          })
+        }
+
+        setTableData(table);
+      });
+  }, []);
   return (
     <div className="user-profile">
       <h1>Your Profile</h1>

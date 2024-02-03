@@ -50,6 +50,7 @@ export const Data = [
 ];
 
 export function generateRandomColor(n) {
+  console.log("n is", n)
   let colors = [];
   for (let i = 0; i < n; i++) {
     const red = Math.floor(Math.random() * 256);

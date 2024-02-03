@@ -1,3 +1,4 @@
+import { backend_url } from "../config";
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
@@ -7,8 +8,7 @@ import {
 
   
   import axios from "axios";
-  // const url = "http://localhost:5000";
-  const url = "https://stocksup.onrender.com"
+  const url = backend_url
   
   // LOGOIN
   export const login = (code, name) => async (dispatch) => {
