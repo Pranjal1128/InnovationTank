@@ -6,55 +6,7 @@ import { backend_url } from "../../config";
 import { useState } from "react";
 import axios from "axios";
 
-
-
-
-// Function to fetch audience ranking
-const getAudienceRanking = async (pageSize = 10, pageNumber = 1) => {
-  try {
-    const response = await axios.get(`${backend_url}/portfolios/audienceRanking`, {
-      params: {
-        pageSize,
-        pageNumber,
-      },
-    });
-    return response.data; // Assuming the response contains the ranking data
-  } catch (error) {
-    console.error('Error fetching audience ranking:', error.message);
-    throw error;
-  }
-};
-
-// Function to fetch current user's rank
-const getCurrUserRank = async (userId) => {
-  try {
-  
-    const response = await axios.get(`${backend_url}/portfolios/currUserRank?userId=${userId}`);
-    return response.data; // Assuming the response contains the user's rank data
-  } catch (error) {
-    console.error('Error fetching current user\'s rank:', error.message);
-    throw error;
-  }
-};
-
 // Example of how to use the functions
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const columns = [
   {
@@ -67,55 +19,22 @@ const columns = [
     disableSortBy: true,
   },
   {
-    Header: "Profit",
-    accessor: "profit",
-  },
-  {
-    Header: "Total",
-    accessor: "total",
+    Header: "Worth",
+    accessor: "worth",
   },
 ];
 
 const AudienceRanking = () => {
-
-  const [audienceRank,setAudienceRank] = useState([]);
-  const [currUser,setcurrUser] = useState();
-
-  const fetchData = async () => {
-    try {
-      // Fetch audience ranking
-      const audienceRanking = await getAudienceRanking();
-
-      try {
-        const audienceRanking = await getAudienceRanking();
-        setAudienceRank(audienceRanking, () => {
-          console.log('Audience Rank set:', audienceRank);
-        });
-      } catch (error) {
-        console.error('Error:', error.message);
-      }
-
-      setAudienceRank(audienceRanking);
-    console.log('Audience Rank set:', audienceRanking);
-
-    const userId = localStorage.getItem('icell_pitcher_userId');
-try {
-  const currUserRank = await getCurrUserRank(userId);
-  setcurrUser(currUserRank);
-  console.log('Current User\'s Rank:', currUserRank);
-} catch (error) {
-  console.error('Error fetching current user\'s rank:', error.message);
-}
+  const [audienceRank, setAudienceRank] = useState([]);
+  const [currUser, setcurrUser] = useState();
+  const [pageNumber, setpageNumber] = useState(1);
+  const [totRows, setTotRows] = useState(1);
+  const pageSize = 10;
+  const [loading, setLoading] = useState(false);
+  const [manageFetechReq, setManageFetechReq] = useState([1]);
 
 
-    
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  };
-
-
-
+  
   const {
     getTableBodyProps,
     getTableProps,
@@ -131,34 +50,83 @@ try {
   } = useTable(
     {
       columns,
-      data: audienceRankingData,
+      data: audienceRank,
       initialState: { pageSize: 10 },
     },
     useSortBy,
     usePagination
-  );
+    );
+  
+  
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      // Fetch audience ranking
+      const audienceRanking = await getAudienceRanking(pageSize, pageNumber);
+      // setAudienceRank((prev) => [...audienceRanking,...prev]);
+      setAudienceRank(audienceRanking)
+      setLoading((prev) => false);
+    } catch (error) {
+      console.error("Error:", error.message);
+      setLoading(false);
+    }
+  };
+
+  // Function to fetch audience ranking
+  const getAudienceRanking = async (pageSize = 10, pageNumber = 1) => {
+    try {
+      const response = await axios.get(
+        `${backend_url}/portfolios/audienceRanking`,
+        {
+          params: {
+            pageSize,
+            pageNumber,
+          },
+        }
+      );
+      const datas = response.data; // Assuming the response contains the ranking data
+
+      const res = datas.users.map((data) => {
+        return {
+          rank: data.rank,
+          name: data.name,
+          worth: data.worth,
+        };
+      });
+      setTotRows(datas.totDocuments);
+      return res;
+    } catch (error) {
+      console.error("Error fetching audience ranking:", error.message);
+      throw error;
+    }
+  };
 
 
+  // Function to fetch current user's rank
+  const getCurrUserRank = async (userId) => {
+    try {
+      const { data } = await axios.get(
+        `${backend_url}/portfolios/currUserRank?userId=${userId}`
+      );
+      setcurrUser((prev) => data);
+      console.log("currUser")
+    } catch (error) {
+      console.error("Error fetching current user's rank:", error.message);
+      throw error;
+    }
+  };
 
-
-
-
-
-
-  useEffect(()=>{ 
+  useEffect(() => {
+    const userId = localStorage.getItem("icell_pitcher_userId");
+    const currUserRank = getCurrUserRank(userId);
+  }, []);
+  useEffect(() => {
     fetchData();
-   
-  },[])
+  }, [ pageNumber /*manageFetechReq*/]);
 
-
-
-
-
-
-
-
-
-  return (
+  return loading ? (
+    "loading ..."
+  ) : (
     <div className="audience-ranking">
       <h1>Ranking Page</h1>
 
@@ -179,6 +147,14 @@ try {
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
+            <tr
+              className="self-rank"
+              style={{ display: pageNumber !== 1 ? "none" : "table-row" }}
+            >
+              <td>{currUser && currUser.rank}</td>
+              <td>{currUser && currUser.name}</td>
+              <td>{currUser && currUser.worth}</td>
+            </tr>
             {page.map((row) => {
               prepareRow(row);
               return (
@@ -193,13 +169,30 @@ try {
         </table>
       </div>
       <div className="btn-container">
-        <button disabled={!canPreviousPage} onClick={previousPage}>
+        <button
+          disabled={pageNumber === 1}
+          onClick={() => {
+            previousPage();
+            setpageNumber((prev) => prev - 1);
+          }}
+        >
           Prev
         </button>
         <span>
-          {pageIndex + 1} of {pageCount}
+          {pageNumber} of {Math.ceil(totRows / pageSize)}
         </span>
-        <button disabled={!canNextPage} onClick={nextPage}>
+        <button
+          disabled={pageNumber === Math.ceil(totRows / pageSize)}
+          onClick={() => {
+            
+            // if (!manageFetechReq.includes(pageNumber + 1)) {
+            //   setManageFetechReq((prev) => [...prev, pageNumber + 1]);
+            // }
+            nextPage();
+            setpageNumber((prev) => prev + 1);
+
+          }}
+        >
           Next
         </button>
       </div>
