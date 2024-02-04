@@ -5,6 +5,7 @@ import { audienceRankingData } from "../UserProfile/utils";
 import { backend_url } from "../../config";
 import { useState } from "react";
 import axios from "axios";
+import Loader from "../Loader/Loader"
 
 // Example of how to use the functions
 
@@ -125,7 +126,7 @@ const AudienceRanking = () => {
   }, [ pageNumber /*manageFetechReq*/]);
 
   return loading ? (
-    "loading ..."
+    <Loader />
   ) : (
     <div className="audience-ranking">
       <h1>Ranking Page</h1>
