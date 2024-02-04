@@ -107,7 +107,7 @@ const ParticipantRanking = () => {
 
   return (
     <div className="participants-profile">
-      <h1>Your Profile</h1>
+      <h1>Participants Ranking</h1>
       <div className="participants-profile-chart-container">
         <div className="doughnut-chart">
           <Doughnut options={{ responsive: true }} data={chartData} />
