@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux"
 import { isLoggedIn } from "../actions/userActions";
 
-export const useUpdateBalance = () => {
+export const useMyDetails = () => {
 
     const [me, setMe] = useState();
     const dispatch = useDispatch();
@@ -11,11 +11,14 @@ export const useUpdateBalance = () => {
     
     useEffect(() => {
       dispatch(isLoggedIn());
-    }, []);
+    }, [me]);
 
     useEffect(() => {
         setMe(myData && myData.user)
     }, [myData])
 
-    return me;
+  // console.log("me: ", me)
+  console.log("custhook me", me)
+
+    return [me,setMe];
 }
