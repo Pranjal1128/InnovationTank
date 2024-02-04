@@ -3,43 +3,39 @@ import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { backend_url } from "../../config";
 import { useSelector } from "react-redux";
+import { Scale, scales } from "chart.js";
 
 function generateTimeIntervals(currentTime) {
   const endDate = new Date(`2024-02-01 ${currentTime}`);
   return endDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-const LineChart1 = ({ portfolio_id,socket }) => {
+const LineChart1 = ({ portfolio_id, socket }) => {
   const [label, setLabel] = useState([]);
   const [lineLabel, setLineLabel] = useState([]);
-
-
 
   console.log("lable is ", label);
   console.log("lineLable is ", lineLabel);
 
-
-  
-
   // for making fetch request
   useEffect(() => {
-    axios.post(`${backend_url}/portfolios/data/line-chart`, {
-      portfolio_id
-    }).then(({ data }) => {
-      setLabel(data.x);
-      setLineLabel(data.lineData)
-    })
-  }, [])
-  
+    axios
+      .post(`${backend_url}/portfolios/data/line-chart`, {
+        portfolio_id,
+      })
+      .then(({ data }) => {
+        setLabel(data.x);
+        setLineLabel(data.lineData);
+      });
+  }, []);
+
   // for making socket connection
   useEffect(() => {
-
     const generateLable = (data) => {
       // data -> avg stock / user
       const curr = new Date(Date.now());
       const currTime = `${curr.getHours()}:${curr.getMinutes()}`;
       let interval = generateTimeIntervals(currTime);
-  
 
       setLabel((x) => {
         if (interval == x[x.length - 1]) {
@@ -47,17 +43,15 @@ const LineChart1 = ({ portfolio_id,socket }) => {
             let lineLableCopy = [...prevLine];
             lineLableCopy[lineLableCopy.length - 1] = data;
             return lineLableCopy;
-          })
+          });
           return [...x];
-        }
-        else {
+        } else {
           setLineLabel((prev) => {
             return [...prev, data];
-          })
-          return [...x, interval]
+          });
+          return [...x, interval];
         }
       });
-      
     };
     socket.on("line-chart-data", generateLable);
     return () => {
@@ -66,7 +60,7 @@ const LineChart1 = ({ portfolio_id,socket }) => {
   }, []);
 
   return (
-    <div>
+    <div className="line-chart">
       <Line
         datasetIdKey="id"
         data={{

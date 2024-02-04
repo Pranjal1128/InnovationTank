@@ -109,3 +109,6 @@ margin-top: 25px;
     display: flex;
 }
 
+.line-chart {
+    color: white !important;
+}

@@ -31,7 +31,7 @@ const BuyPage = () => {
   const [userMoney, setUserMoney] = useState(0);
   let [carouselItems, setCarouselItems] = useState([]);
 
-  const [me, setMe] = useMyDetails();
+  const [me, setRender] = useMyDetails();
 
   // custom hook
   const comp1 = () => {
@@ -95,7 +95,7 @@ const BuyPage = () => {
 
     socket.on("successfully-purchased", (purchasedProd) => {
       ToastCallSuccess(`Successfully Purchased ${purchasedProd} stocks`);
-      setMe({})
+      setRender((prev) => !prev);
 
     });
 
