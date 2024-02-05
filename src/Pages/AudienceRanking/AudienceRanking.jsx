@@ -4,7 +4,7 @@ import { useTable, useSortBy, usePagination } from "react-table";
 import { audienceRankingData } from "../UserProfile/utils";
 import { backend_url } from "../../config";
 import { useState } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
 import Loader from "../Loader/Loader"
 
 // Example of how to use the functions
@@ -27,12 +27,14 @@ const columns = [
 
 const AudienceRanking = () => {
   const [audienceRank, setAudienceRank] = useState([]);
+  const [allAudienceRanks, setAllAudienceRanks] = useState([]);
   const [currUser, setcurrUser] = useState();
   const [pageNumber, setpageNumber] = useState(1);
   const [totRows, setTotRows] = useState(1);
   const pageSize = 10;
   const [loading, setLoading] = useState(false);
   const [manageFetechReq, setManageFetechReq] = useState([1]);
+  
 
 
   
@@ -58,13 +60,12 @@ const AudienceRanking = () => {
     usePagination
     );
   
-  
   const fetchData = async () => {
     try {
       setLoading(true);
       // Fetch audience ranking
       const audienceRanking = await getAudienceRanking(pageSize, pageNumber);
-      // setAudienceRank((prev) => [...audienceRanking,...prev]);
+      setAllAudienceRanks((prev) => [...prev,audienceRanking]);
       setAudienceRank(audienceRanking)
       setLoading((prev) => false);
     } catch (error) {
@@ -123,7 +124,14 @@ const AudienceRanking = () => {
   }, []);
   useEffect(() => {
     fetchData();
-  }, [ pageNumber /*manageFetechReq*/]);
+  }, [manageFetechReq]);
+  
+  useEffect(() => {
+
+    if (allAudienceRanks.length >= pageNumber) {
+      setAudienceRank(allAudienceRanks[pageNumber-1]);
+    }
+  }, [pageNumber])
 
   return loading ? (
     <Loader />
@@ -173,8 +181,11 @@ const AudienceRanking = () => {
         <button
           disabled={pageNumber === 1}
           onClick={() => {
-            previousPage();
-            setpageNumber((prev) => prev - 1);
+            setpageNumber((prevPage) => {
+              
+              return prevPage - 1
+            });
+            
           }}
         >
           Prev
@@ -186,11 +197,12 @@ const AudienceRanking = () => {
           disabled={pageNumber === Math.ceil(totRows / pageSize)}
           onClick={() => {
             
-            // if (!manageFetechReq.includes(pageNumber + 1)) {
-            //   setManageFetechReq((prev) => [...prev, pageNumber + 1]);
-            // }
-            nextPage();
-            setpageNumber((prev) => prev + 1);
+            if (!manageFetechReq.includes(pageNumber + 1)) {
+              setManageFetechReq((prev) => [...prev, pageNumber + 1]);
+            }
+            setpageNumber((prevPage) => {
+              return prevPage + 1
+            });
 
           }}
         >
