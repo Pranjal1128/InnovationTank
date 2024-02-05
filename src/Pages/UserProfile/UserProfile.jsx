@@ -41,6 +41,35 @@ const columns = [
   },
 ];
 
+const options = {
+  // scaleShowValues : true,
+  scales: {
+    x: {
+      grid: {
+        color: 'red', // X-axis grid color
+      },
+      ticks: {
+        color: 'blue', // X-axis tick color
+        autoSkip: false,
+        padding: 10,
+        maxRotation: 90,
+        minRotation: 80,
+        // fontSize: 100
+      },
+    },
+    y: {
+      grid: {
+        color: 'rgba(0,255,0,0.5)', // Y-axis grid color
+      },
+      ticks: {
+        color: 'orange', // Y-axis tick color
+        beginAtZero: true,
+      },
+    },
+  },
+  maintainAspectRatio: false,
+  responsive: true
+};
 
 
 const UserProfile = () => {
@@ -145,10 +174,10 @@ const UserProfile = () => {
       <h1>Your Profile</h1>
       <div className="user-profile-chart-container">
         <div className="doughnut-chart">
-          <Doughnut options={{ responsive: true }} data={chartData} />
+          <Doughnut options={options} data={chartData} />
         </div>
         <div className="bar-chart">
-          <Bar options={{ maintainAspectRatio: false }} data={chartData} />
+          <Bar options={options} data={chartData} />
         </div>
       </div>
 
