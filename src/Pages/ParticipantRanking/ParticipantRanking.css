@@ -99,7 +99,7 @@
 
 
 .btn-container {
-    margin: 1rem 0rem;
+    padding-bottom: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
