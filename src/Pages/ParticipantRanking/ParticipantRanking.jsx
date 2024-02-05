@@ -8,10 +8,10 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut, Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import { useTable, useSortBy, usePagination } from "react-table";
-import { backend_url } from "../../config.js";
+import { backend_url,initialstocks } from "../../config.js";
 import { useSelector, useDispatch } from "react-redux";
 import { getPortfolio } from "../../actions/portfolio.js";
-const initialstocks = 200;
+
 
 Chart.register(...registerables);
 ChartJS.register(ArcElement, Tooltip, Legend);
