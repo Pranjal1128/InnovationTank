@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../UserProfile/UserProfile.css";
-import "./ParticipantRanking.css"
+import "./ParticipantRanking.css";
 
 import { Data, generateRandomColor } from "../UserProfile/utils.js";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -11,65 +11,58 @@ import { useTable, useSortBy, usePagination } from "react-table";
 import { backend_url } from "../../config.js";
 import { useSelector, useDispatch } from "react-redux";
 import { getPortfolio } from "../../actions/portfolio.js";
+const initialstocks = 200;
 
 Chart.register(...registerables);
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const columns = [
   {
-    Header: "S.NO. ",
-    accessor: "sno",
-    disableSortBy: true,
-  },
-  {
     Header: "Startups",
     accessor: "name",
     disableSortBy: true,
   },
   {
-    Header: "Leader",
-    accessor : "leader"
-  },
-  {
-    Header: "Sold stocks",
+    Header: "Remaining stocks",
     accessor: "stock",
-  },
-  {
-    Header: "Worth",
-    accessor: "worth",
   },
   {
     Header: "Multiplier",
     accessor: "multiplier",
     disableSortBy: true,
   },
-
 ];
 
 const ParticipantRanking = () => {
   const [soldStocks, setSoldStocks] = useState([]);
   const [startupNames, setStartupNames] = useState([]);
   const [tableData, setTableData] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.portfolio) || [];
 
   useEffect(() => {
     dispatch(getPortfolio());
+
+   
   }, []);
 
   useEffect(() => {
-    console.log("posts", posts)
-    setStartupNames(posts && posts[0]?.map((post) => post.name));
-    setSoldStocks(posts && posts[0]?.map((post) => post.stock));
 
+    if (posts.length > 0) {
+      setStartupNames(posts[0]?.map((post) => post.name));
+      setSoldStocks(posts[0]?.map((post) => initialstocks - post.stock));
 
-    setTableData(posts && posts[0]?.map((post, idx) => {
-      return {
-        sno: idx + 1,
-        ...post
-      }
-    }))
-  }, [posts])
+      setTableData(
+        posts[0]?.map((post, idx) => {
+          return {
+            sno: idx + 1,
+            ...post,
+          };
+        })
+      );
+    }
+
+  }, [posts]);
 
   const chartData = {
     labels: startupNames, // total startup name
@@ -77,7 +70,9 @@ const ParticipantRanking = () => {
       {
         label: "Histogram ",
         data: soldStocks, //sold stocks
-        backgroundColor: generateRandomColor(startupNames && startupNames.length),
+        backgroundColor: generateRandomColor(
+          startupNames ? startupNames.length : 0
+        ),
         hoverOffset: 4,
       },
     ],
@@ -104,10 +99,9 @@ const ParticipantRanking = () => {
     usePagination
   );
 
-
-  return (
+  return posts && posts[0] ? (
     <div className="participants-profile">
-      <h1>Participants Ranking</h1>
+      <h1>Participants Summary</h1>
       <div className="participants-profile-chart-container">
         <div className="doughnut-chart">
           <Doughnut options={{ responsive: true }} data={chartData} />
@@ -159,6 +153,8 @@ const ParticipantRanking = () => {
         </button>
       </div>
     </div>
+  ) : (
+    "Loading..."
   );
 };
 

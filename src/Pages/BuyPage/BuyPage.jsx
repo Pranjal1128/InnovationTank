@@ -9,11 +9,11 @@ import LineChart1 from "./LineChart1";
 import { ToastCallError, ToastCallSuccess } from "../../ReactToast";
 import { io } from "socket.io-client";
 import { backend_url } from "../../config";
+import { useMyDetails } from "../../customHooks/useMyDetails";
 
 const comp2 = () => {
   return <p>hi there.</p>;
 };
-
 
 let socket;
 let userId;
@@ -28,8 +28,12 @@ const BuyPage = () => {
   const [name, setName] = useState();
   const [leader, setLeader] = useState();
   const [stocks, setStocks] = useState();
-  const [userMoney,setUserMoney] = useState(0);
+  const [userMoney, setUserMoney] = useState(0);
   let [carouselItems, setCarouselItems] = useState([]);
+
+  const [me, setRender] = useMyDetails();
+
+  // custom hook
   const comp1 = () => {
     return <p style={{ textAlign: "center" }}>{bio}</p>;
   };
@@ -48,6 +52,7 @@ const BuyPage = () => {
     }
 
     socket.volatile.emit("buy", id, userId, buyProd);
+    buyRef.current.value = "";
   };
 
   useEffect(() => {
@@ -55,26 +60,25 @@ const BuyPage = () => {
     // socket = io("http://localhost:5000");
     console.log("useeffect");
 
-    userId = localStorage.getItem("icell_pitcher_userId")
+    userId = localStorage.getItem("icell_pitcher_userId");
     //   ? JSON.parse(localStorage.getItem("icell_pitcher_userId"))
     //   : null;
     userId = localStorage.getItem("icell_pitcher_userId")
       ? JSON.parse(localStorage.getItem("icell_pitcher_userId"))
       : null;
 
-
     console.log(userId);
     socket.on("connect", () => {
       console.log("Socket is connected (frontend)");
     });
 
-
     socket.emit("join-room", id);
-
 
     socket.emit("getStock", id, userId, (getData) => {
       setStocks(getData[0]);
       setUserMoney(getData[1]);
+
+      // navbar change
     });
 
     socket.on("show-stock", (stock) => {
@@ -86,14 +90,15 @@ const BuyPage = () => {
       ToastCallError("Dont have enough Stock ");
     });
 
-
     socket.on("stock-empty", () => {
       ToastCallError("stock empty");
     });
 
-
     socket.on("successfully-purchased", (purchasedProd) => {
       ToastCallSuccess(`Successfully Purchased ${purchasedProd} stocks`);
+      setRender((prev) => !prev);
+
+
     });
 
     socket.on("disconnect", function () {
@@ -101,7 +106,11 @@ const BuyPage = () => {
       navigate("/Portfolio");
     });
 
-    setCarouselItems([<LineChart1 portfolio_id = {id} socket={socket} /> ,comp1(), comp2()])
+    setCarouselItems([
+      <LineChart1 portfolio_id={id} socket={socket} />,
+      comp1(),
+      comp2(),
+    ]);
     return () => {
       console.log("socket disconnecg");
       socket.disconnect();
@@ -124,7 +133,7 @@ const BuyPage = () => {
         }
       }
     }
-  }, [id, projects]);
+  }, [id]);
 
   // const carouselItems = [<LineChart1 socket={socket} /> ,comp1(), comp2()];
 
@@ -132,10 +141,9 @@ const BuyPage = () => {
     <div className="buy-page">
       <div className="buy-page-details">
         <h2>{name}</h2>
-      
+
         <Carousel items={carouselItems} />
       </div>
-      <p id="stock">12</p>
       <div className="buy-page-input">
         <p>
           <input

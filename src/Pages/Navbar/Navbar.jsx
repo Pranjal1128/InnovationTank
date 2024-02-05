@@ -9,24 +9,26 @@ import { FaRankingStar } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import {  useMyDetails } from "../../customHooks/useMyDetails";
 
-function Navbar({onDataChange}) {
+function Navbar({ onDataChange }) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate()
+  const [me, setMe] = useMyDetails();
+
+  const navigate = useNavigate();
+
   // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
   // const closeInfoModal = () => setInfoModalOpen(false);
-  const moneyLeft = 12;
+  // const moneyLeft = 12;
+
   const Logout = () => {
+    localStorage.removeItem("icell_pitcher_code");
 
-localStorage.removeItem('icell_pitcher_code');
+    localStorage.removeItem("icell_pitcher_userId");
+    navigate("/");
+  };
 
-
-localStorage.removeItem('icell_pitcher_userId');
-navigate("/")
-    
-  }
-  
   const openInfoModal = () => {
     // const newData = event.target.value;
     setInfoModalOpen(!isInfoModalOpen);
@@ -56,7 +58,6 @@ navigate("/")
       }
     };
 
- 
     window.addEventListener("click", handleOutsideClick);
 
     return () => {
@@ -80,7 +81,7 @@ navigate("/")
 
       {/* Info Modal */}
       {isInfoModalOpen && (
-        <div className="modal-overlay" style={{filter:"blur(0) !important"}}>
+        <div className="modal-overlay" style={{ filter: "blur(0) !important" }}>
           <div className="modal">
             <div className="modal-header">
               <h2>Instructions</h2>
@@ -111,17 +112,38 @@ navigate("/")
           </div>
           <div className="menu">
             <div className="menu-options">
-              <a href="#Portfolio" className="menu-item"><span><FaHome/></span><span>Home</span></a>
-              <a href="#AudienceRanking" className="menu-item"> <FaRankingStar/><span>Audience Ranking</span></a>
-              <a href="#ParticipantRanking" className="menu-item"> <FaRankingStar/><span> Participant Ranking</span></a>
-              <a href="#UserProfile" className="menu-item"><FaUser/><span>User Portfolio</span></a>
-              <a onClick={()=> Logout()}  className="menu-item"><FaSignOutAlt/><span>Log Out</span></a>
+              <a href="#Portfolio" className="menu-item">
+                <span>
+                  <FaHome />
+                </span>
+                <span>Home</span>
+              </a>
+              <a href="#AudienceRanking" className="menu-item">
+                {" "}
+                <FaRankingStar />
+                <span>Audience Ranking</span>
+              </a>
+              <a href="#ParticipantRanking" className="menu-item">
+                {" "}
+                <FaRankingStar />
+                <span> Participants Summary</span>
+              </a>
+              <a href="#UserProfile" className="menu-item">
+                <FaUser />
+                <span>User Portfolio</span>
+              </a>
+              <a onClick={() => Logout()} className="menu-item">
+                <FaSignOutAlt />
+                <span>Log Out</span>
+              </a>
             </div>
             {/* <span onClick={openMenu} className="close-btn">
               &times;
             </span> */}
           </div>
-          <button className="balance">Balance: <span className="amount">${moneyLeft}</span></button>
+          <button className="balance">
+            Balance: <span className="amount">${me.userStock}</span>
+          </button>
           <div className="powered-menu">
             Powered by <span className="icell-menu">Innovation Cell</span>
           </div>

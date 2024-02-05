@@ -56,8 +56,8 @@ const UserProfile = () => {
       },
     ],
   };
-
-  console.log("chatData:");
+  
+  console.log("chatData:" , tableData);
   const {
     getTableBodyProps,
     getTableProps,
