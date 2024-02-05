@@ -177,37 +177,39 @@ const AudienceRanking = () => {
           </tbody>
         </table>
       </div>
-      <div className="btn-container">
-        <button
-          disabled={pageNumber === 1}
-          onClick={() => {
-            setpageNumber((prevPage) => {
+      <div className="btn-container2">
+        <div className="btn-page">
+          <button
+            disabled={pageNumber === 1}
+            onClick={() => {
+              setpageNumber((prevPage) => {
+                
+                return prevPage - 1
+              });
               
-              return prevPage - 1
-            });
-            
-          }}
-        >
-          Prev
-        </button>
-        <span>
-          {pageNumber} of {Math.ceil(totRows / pageSize)}
-        </span>
-        <button
-          disabled={pageNumber === Math.ceil(totRows / pageSize)}
-          onClick={() => {
-            
-            if (!manageFetechReq.includes(pageNumber + 1)) {
-              setManageFetechReq((prev) => [...prev, pageNumber + 1]);
-            }
-            setpageNumber((prevPage) => {
-              return prevPage + 1
-            });
+            }}
+          >
+            Prev
+          </button>
+          <span>
+            {pageNumber} of {Math.ceil(totRows / pageSize)}
+          </span>
+          <button
+            disabled={pageNumber === Math.ceil(totRows / pageSize)}
+            onClick={() => {
+              
+              if (!manageFetechReq.includes(pageNumber + 1)) {
+                setManageFetechReq((prev) => [...prev, pageNumber + 1]);
+              }
+              setpageNumber((prevPage) => {
+                return prevPage + 1
+              });
 
-          }}
-        >
-          Next
-        </button>
+            }}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

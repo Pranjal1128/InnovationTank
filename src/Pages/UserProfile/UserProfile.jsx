@@ -56,8 +56,8 @@ const UserProfile = () => {
       },
     ],
   };
-  
-  console.log("chatData:" , tableData);
+
+  console.log("chatData:", tableData);
   const {
     getTableBodyProps,
     getTableProps,
@@ -93,13 +93,13 @@ const UserProfile = () => {
         let len = data.buyStartupStocks.length;
         for (let i = 0; i < len; i++) {
           table.push({
-            sno: i+1,
+            sno: i + 1,
             startup: data.startupsName[i],
             quantity: data.buyStartupStocks[i],
             percent: 94,
             multiplier: 52,
             curr_worth: 27,
-          })
+          });
         }
 
         setTableData(table);
@@ -147,7 +147,7 @@ const UserProfile = () => {
           </tbody>
         </table>
       </div>
-      <div className="btn-container">
+      <div className="btn-container1">
         <button disabled={!canPreviousPage} onClick={previousPage}>
           Prev
         </button>

@@ -98,14 +98,14 @@
 }
 
 
-.btn-container {
-    margin: 1rem 0rem;
+.btn-container1 {
+    padding-bottom: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.btn-container > button {
+.btn-container1 > button {
     font-size: 1rem;
     background: black;
     padding: 0.5rem 1rem;
@@ -114,10 +114,9 @@
     border-radius: 10px;
     cursor: pointer;
     margin: 0 1rem;
-    
 }
 
-.btn-container > button:disabled {
+.btn-container1 > button:disabled {
     cursor: not-allowed;
     background-color: rgb(229, 229, 229);
     color: rgba(0, 0, 0, 0.269);
@@ -147,8 +146,13 @@
     border-radius: 10px;
 }
 
+.user-profile-details > div:nth-child(1) {
+    margin-top: 0;
+}
+
 .user-profile-details > div:nth-child(2) {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -157,7 +161,8 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    margin-bottom: 0;
 }
 
 .profit {
@@ -185,6 +190,6 @@
 @media screen and (max-width : 450px) {
     .user-profile-details > div:nth-child(2) {
         justify-content: center;
-        gap: 1rem;
+        gap: 0.8rem;
     }
 }
