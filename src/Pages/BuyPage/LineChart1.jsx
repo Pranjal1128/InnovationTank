@@ -14,8 +14,6 @@ const LineChart1 = ({ portfolio_id, socket }) => {
   const [label, setLabel] = useState([]);
   const [lineLabel, setLineLabel] = useState([]);
 
-  console.log("lable is ", label);
-  console.log("lineLable is ", lineLabel);
 
   // for making fetch request
   useEffect(() => {
@@ -53,11 +51,35 @@ const LineChart1 = ({ portfolio_id, socket }) => {
         }
       });
     };
+
+
     socket.on("line-chart-data", generateLable);
     return () => {
       // socket.disconnect();
     };
   }, []);
+
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          color: 'red', // X-axis grid color
+        },
+        ticks: {
+          color: 'blue', // X-axis tick color
+        },
+      },
+      y: {
+        grid: {
+          color: 'rgba(0,255,0,0.5)', // Y-axis grid color
+        },
+        ticks: {
+          color: 'orange', // Y-axis tick color
+        },
+      },
+    },
+  };
+  
 
   return (
     <div className="line-chart">
@@ -73,6 +95,8 @@ const LineChart1 = ({ portfolio_id, socket }) => {
             },
           ],
         }}
+        options={options}
+      
       />
     </div>
   );

@@ -1,26 +1,21 @@
 import { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { isLoggedIn } from "../actions/userActions";
 
-export const useMyDetails = (flag=1) => {
-
+export const useMyDetails = (flag = 1) => {
   const [me, setMe] = useState();
   const [render, setRender] = useState(false);
-    const dispatch = useDispatch();
-    
-    const myData = useSelector((state) => state.authReducer);
-    
-    useEffect(() => {
-      dispatch(isLoggedIn());
-    }, [render]);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-      setMe(myData && myData.user)
-      
-    }, [myData])
+  const myData = useSelector((state) => state.authReducer);
 
-  // console.log("me: ", me)
-  console.log("custhook useMyDetails", me)
+  useEffect(() => {
+    dispatch(isLoggedIn());
+  }, [render]);
 
-    return [me,setRender];
-}
+  useEffect(() => {
+    setMe(myData && myData.user);
+  }, [myData]);
+
+  return [me, setRender];
+};
