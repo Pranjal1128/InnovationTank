@@ -15,7 +15,6 @@ function Navbar({ onDataChange }) {
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [me, setMe] = useMyDetails();
-
   const navigate = useNavigate();
 
   // const openInfoModal = () => setInfoModalOpen(!isInfoModalOpen);
@@ -116,23 +115,23 @@ function Navbar({ onDataChange }) {
                 <span>
                   <FaHome />
                 </span>
-                <span>Home</span>
+                <span onClick={() => setMenuOpen(!isMenuOpen)}>Home</span>
               </a>
               <a href="#AudienceRanking" className="menu-item">
                 {" "}
                 <FaRankingStar />
-                <span>Audience Ranking</span>
+                <span onClick={() => setMenuOpen(!isMenuOpen)}>Audience Ranking</span>
               </a>
               <a href="#ParticipantRanking" className="menu-item">
                 {" "}
                 <FaRankingStar />
-                <span> Participants Summary</span>
+                <span onClick={() => setMenuOpen(!isMenuOpen)}> Participants Summary</span>
               </a>
               <a href="#UserProfile" className="menu-item">
                 <FaUser />
-                <span>User Portfolio</span>
+                <span onClick={() => setMenuOpen(!isMenuOpen)}>User Portfolio</span>
               </a>
-              <a onClick={() => Logout()} className="menu-item">
+              <a onClick={() => Logout()}  className="menu-item">
                 <FaSignOutAlt />
                 <span>Log Out</span>
               </a>
