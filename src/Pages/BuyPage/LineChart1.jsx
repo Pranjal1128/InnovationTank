@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { backend_url } from "../../config";
-import { useSelector } from "react-redux";
-import { Scale, scales } from "chart.js";
+import { Chart  } from 'chart.js/auto'
+import {CategoryScale} from 'chart.js'; 
+Chart.register(CategoryScale);
 
 function generateTimeIntervals(currentTime) {
   const endDate = new Date(`2024-02-01 ${currentTime}`);
