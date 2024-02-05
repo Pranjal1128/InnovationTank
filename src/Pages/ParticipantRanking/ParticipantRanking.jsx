@@ -23,7 +23,7 @@ const columns = [
     disableSortBy: true,
   },
   {
-    Header: "Remaining stocks",
+    Header: "Sold stocks",
     accessor: "stock",
   },
   {
@@ -54,6 +54,7 @@ const ParticipantRanking = () => {
 
       setTableData(
         posts[0]?.map((post, idx) => {
+          post.stock = initialstocks - post.stock
           return {
             sno: idx + 1,
             ...post,
