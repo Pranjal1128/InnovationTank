@@ -11,32 +11,20 @@ import { useTable, useSortBy, usePagination } from "react-table";
 import { backend_url } from "../../config.js";
 import { useSelector, useDispatch } from "react-redux";
 import { getPortfolio } from "../../actions/portfolio.js";
+const initialstocks = 200;
 
 Chart.register(...registerables);
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const columns = [
   {
-    Header: "S.NO. ",
-    accessor: "sno",
-    disableSortBy: true,
-  },
-  {
     Header: "Startups",
     accessor: "name",
     disableSortBy: true,
   },
   {
-    Header: "Leader",
-    accessor : "leader"
-  },
-  {
-    Header: "Sold stocks",
-    accessor: "stock",
-  },
-  {
-    Header: "Worth",
-    accessor: "worth",
+    Header: "Remaining stocks",
+    accessor:  "stock",
   },
   {
     Header: "Multiplier",
@@ -60,7 +48,7 @@ const ParticipantRanking = () => {
   useEffect(() => {
     console.log("posts", posts)
     setStartupNames(posts && posts[0]?.map((post) => post.name));
-    setSoldStocks(posts && posts[0]?.map((post) => post.stock));
+    setSoldStocks(posts && posts[0]?.map((post) => initialstocks - post.stock));
 
 
     setTableData(posts && posts[0]?.map((post, idx) => {
@@ -107,7 +95,7 @@ const ParticipantRanking = () => {
 
   return (
     <div className="participants-profile">
-      <h1>Participants Ranking</h1>
+      <h1>Participants Summary</h1>
       <div className="participants-profile-chart-container">
         <div className="doughnut-chart">
           <Doughnut options={{ responsive: true }} data={chartData} />
