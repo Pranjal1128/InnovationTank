@@ -14,7 +14,6 @@
 }
 
 .audience-ranking-table {
-    
     overflow-x: scroll;
     margin: 1rem;
 }
@@ -22,6 +21,7 @@
 .audience-ranking-table::-webkit-scrollbar {
     height: 0;
 }
+
 /* 
 .audience-ranking-table::-webkit-scrollbar-thumb {
     background-color: rgb(36, 170, 170);
@@ -67,11 +67,11 @@
 }
 
 
-.btn-container {
-    margin: 2rem 0rem;
+.btn-container2 {
+    padding-bottom: 2rem;
 }
 
-.btn-container > button {
+.btn-container2  > .btn-page > button {
     font-size: 1rem;
     background: black;
     padding: 0.5rem 1rem;
@@ -80,15 +80,19 @@
     border-radius: 10px;
     cursor: pointer;
     margin: 0 1rem;
-    
 }
 
-.btn-container > button:disabled {
+.btn-container2 > .btn-page > button:disabled {
     cursor: not-allowed;
     background-color: rgb(229, 229, 229);
     color: black;
 }
 
+.btn-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .self-rank {
     background-color: #5e37c2;

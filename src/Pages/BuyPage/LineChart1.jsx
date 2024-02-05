@@ -64,18 +64,18 @@ const LineChart1 = ({ portfolio_id, socket }) => {
     scales: {
       x: {
         grid: {
-          color: 'red', // X-axis grid color
+          color: "#ddea11", // X-axis grid color
         },
         ticks: {
-          color: 'blue', // X-axis tick color
+          color: "#dddddd", // X-axis tick color
         },
       },
       y: {
         grid: {
-          color: 'rgba(0,255,0,0.5)', // Y-axis grid color
+          color: "#dddddd", // Y-axis grid color
         },
         ticks: {
-          color: 'orange', // Y-axis tick color
+          color: "#dddddd", // Y-axis tick color
         },
       },
     },

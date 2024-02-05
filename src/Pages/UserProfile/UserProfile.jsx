@@ -155,7 +155,7 @@ const UserProfile = () => {
           var n = data.startupsName[0]
           const curr = data.buyStartupStocks[i] * m
           table.push({
-            sno: i+1,
+            sno: i + 1,
             startup: data.startupsName[i],
             quantity: quant,
             // percent: 94,
@@ -211,7 +211,7 @@ const UserProfile = () => {
           </tbody>
         </table>
       </div>
-      <div className="btn-container">
+      <div className="btn-container1">
         <button disabled={!canPreviousPage} onClick={previousPage}>
           Prev
         </button>
