@@ -126,7 +126,7 @@ function Navbar({ onDataChange }) {
               <a href="#ParticipantRanking" className="menu-item">
                 {" "}
                 <FaRankingStar />
-                <span> Participant Ranking</span>
+                <span> Participants Summary</span>
               </a>
               <a href="#UserProfile" className="menu-item">
                 <FaUser />
