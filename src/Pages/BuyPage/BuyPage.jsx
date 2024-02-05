@@ -52,6 +52,7 @@ const BuyPage = () => {
     }
 
     socket.volatile.emit("buy", id, userId, buyProd);
+    buyRef.current.value = "";
   };
 
   useEffect(() => {
@@ -97,6 +98,7 @@ const BuyPage = () => {
       ToastCallSuccess(`Successfully Purchased ${purchasedProd} stocks`);
       setRender((prev) => !prev);
 
+
     });
 
     socket.on("disconnect", function () {
@@ -131,7 +133,7 @@ const BuyPage = () => {
         }
       }
     }
-  }, [id, projects]);
+  }, [id]);
 
   // const carouselItems = [<LineChart1 socket={socket} /> ,comp1(), comp2()];
 
