@@ -26,25 +26,48 @@ const columns = [
     Header: "Quantity",
     accessor: "quantity",
   },
-  {
-    Header: "Percent",
-    accessor: "percent",
-  },
+  // {
+  //   Header: "Percent",
+  //   accessor: "percent",
+  // },
   {
     Header: "Multiplier",
     accessor: "multiplier",
     disableSortBy: true,
   },
   {
-    Header: "Curr_Worth",
-    accessor: "curr_worth",
+    Header: "Worth",
+    accessor: "worth",
   },
 ];
+
+
 
 const UserProfile = () => {
   const [boughtStocks, setBoughtStocks] = useState([]);
   const [startupNames, setStartupNames] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [totalWorth, setTotalWorth] = useState();
+  const multiplierUrl = `${backend_url}/portfolios/multiplier`;
+
+  const [map, setMap] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(multiplierUrl);
+        
+       
+        const mapData = response.data;
+        setMap(mapData);
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const chartData = {
     labels: startupNames, // total startup name
     datasets: [
@@ -57,7 +80,7 @@ const UserProfile = () => {
     ],
   };
   
-  console.log("chatData:" , tableData);
+  // console.log("chatData:" , tableData);
   const {
     getTableBodyProps,
     getTableProps,
@@ -80,7 +103,9 @@ const UserProfile = () => {
   );
 
   useEffect(() => {
-    console.log("token", localStorage.getItem("icell_pitcher_code"));
+
+   
+
     axios
       .post(`${backend_url}/api/v1/user/buy/details`, {
         token: localStorage.getItem("icell_pitcher_code").slice(1, -1),
@@ -91,20 +116,30 @@ const UserProfile = () => {
 
         let table = [];
         let len = data.buyStartupStocks.length;
+        var total=0;
         for (let i = 0; i < len; i++) {
+          var m = 0
+          var n = data.startupsName[i]
+          if(map!=null) m = map[n]
+        
+          const quant = data.buyStartupStocks[i]
+          var n = data.startupsName[0]
+          const curr = data.buyStartupStocks[i] * m
           table.push({
             sno: i+1,
             startup: data.startupsName[i],
-            quantity: data.buyStartupStocks[i],
-            percent: 94,
-            multiplier: 52,
-            curr_worth: 27,
+            quantity: quant,
+            // percent: 94,
+            multiplier: m,
+            worth: curr
           })
+          total  = total + curr;
+         
         }
-
+        setTotalWorth(total)
         setTableData(table);
       });
-  }, []);
+  }, [map]);
   return (
     <div className="user-profile">
       <h1>Your Profile</h1>
@@ -161,7 +196,7 @@ const UserProfile = () => {
 
       <div className="user-profile-details">
         <div>
-          <p>Final Worth - 34$</p>
+          <p>Total Worth - {totalWorth}$</p>
         </div>
         <div>
           <p>money invested - 34$</p>
