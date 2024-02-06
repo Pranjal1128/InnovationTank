@@ -6,7 +6,7 @@ import {isLoggedIn, login} from "../../actions/userActions.js";
 import { useRef } from "react";
 import { useEffect } from "react";
 import logo from "../../Assets/images/NITrr.png";
-
+import {ToastCallError} from "../../ReactToast.js"
 function Login() {
   const navigate = useNavigate();
   const nameRef = useRef(null);
@@ -19,7 +19,7 @@ function Login() {
       navigate("/Portfolio");
     }
     if (error) {
-      alert(error);
+      ToastCallError(error);
     }
 
     dispatch(isLoggedIn());

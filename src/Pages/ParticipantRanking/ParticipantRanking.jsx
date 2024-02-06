@@ -11,6 +11,7 @@ import { useTable, useSortBy, usePagination } from "react-table";
 import { backend_url,initialstocks } from "../../config.js";
 import { useSelector, useDispatch } from "react-redux";
 import { getPortfolio } from "../../actions/portfolio.js";
+import { useRedirectToLogin } from "../../customHooks/useRedirectToLogin.js";
 
 
 Chart.register(...registerables);
@@ -40,6 +41,9 @@ const ParticipantRanking = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.portfolio) || [];
 
+
+
+  useRedirectToLogin()
   useEffect(() => {
     dispatch(getPortfolio());
 
