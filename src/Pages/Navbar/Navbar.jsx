@@ -21,6 +21,11 @@ function Navbar({ onDataChange }) {
   // const closeInfoModal = () => setInfoModalOpen(false);
   // const moneyLeft = 12;
 
+  const touserProfile = ()=>
+  {
+    navigate("/userProfile")
+  }
+
   const Logout = () => {
     localStorage.removeItem("icell_pitcher_code");
 
@@ -86,12 +91,15 @@ function Navbar({ onDataChange }) {
               <h2>Instructions</h2>
             </div>
             <ul className="modal-content">
-              <li>Don't share this app with your friends</li>
-              <li>Don't share this app with your friends</li>
-              <li>Don't share this app with your friends</li>
-              <li>Don't share this app with your friends</li>
-              <li>Don't share this app with your friends</li>
-              <li>Don't share this app with your friends</li>
+            <li>Guard your code as it uniquely identifies you; refrain from sharing it with others.</li>
+<li>Refer to the side menu to track your virtual currency balance.</li>
+<li>Invest your virtual currency in stocks from the Portfolio of Ideas.</li>
+<li>As the event concludes, the growth of each company will be determined based on microeconomic parameters over a 5-year period. A growth multiplier will then be assigned to each portfolio.</li>
+<li>Calculate your worth by considering the stocks you've purchased and their respective multipliers.</li>
+<li>Discover your ranking and worth on the Audience Ranking page at the conclusion of the event.</li>
+<li>Review your buy history and analysis in the user profile page.</li>
+<li>Utilize the chart on the buy page to assess the buy rate for each portfolio.</li>
+<li>Gain insights into the performance of each portfolio through the Participants Summary.</li>
             </ul>
           </div>
         </div>
@@ -127,10 +135,11 @@ function Navbar({ onDataChange }) {
                 <FaRankingStar />
                 <span onClick={() => setMenuOpen(!isMenuOpen)}> Participants Summary</span>
               </a>
-              <a href="#UserProfile" className="menu-item">
-                <FaUser />
+              <div onClick={()=>touserProfile()} className="menu-item">
+              <FaUser />
                 <span onClick={() => setMenuOpen(!isMenuOpen)}>User Portfolio</span>
-              </a>
+              </div >
+            
               <a onClick={() => Logout()}  className="menu-item">
                 <FaSignOutAlt />
                 <span>Log Out</span>

@@ -223,7 +223,7 @@ const UserProfile = () => {
         </button>
       </div>
 
-      <div className="user-profile-details">
+      {/* <div className="user-profile-details">
         <div>
           <p>Total Worth - {totalWorth}$</p>
         </div>
@@ -235,7 +235,7 @@ const UserProfile = () => {
           <p className="profit">Profit - 34$</p>
           <p className="loss">Loss - 34$</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
