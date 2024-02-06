@@ -7,6 +7,8 @@ import { Doughnut, Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import { useTable, useSortBy, usePagination } from "react-table";
 import { backend_url } from "../../config.js";
+import { useRedirectToLogin } from "../../customHooks/useRedirectToLogin.js";
+import { useNavigate } from "react-router-dom";
 
 Chart.register(...registerables);
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -46,10 +48,10 @@ const options = {
   scales: {
     x: {
       grid: {
-        color: 'red', // X-axis grid color
+        color: "red", // X-axis grid color
       },
       ticks: {
-        color: 'blue', // X-axis tick color
+        color: "blue", // X-axis tick color
         autoSkip: false,
         padding: 10,
         maxRotation: 90,
@@ -59,20 +61,20 @@ const options = {
     },
     y: {
       grid: {
-        color: 'rgba(0,255,0,0.5)', // Y-axis grid color
+        color: "rgba(0,255,0,0.5)", // Y-axis grid color
       },
       ticks: {
-        color: 'orange', // Y-axis tick color
+        color: "orange", // Y-axis tick color
         beginAtZero: true,
       },
     },
   },
   maintainAspectRatio: false,
-  responsive: true
+  responsive: true,
 };
 
-
 const UserProfile = () => {
+  const navigate = useNavigate();
   const [boughtStocks, setBoughtStocks] = useState([]);
   const [startupNames, setStartupNames] = useState([]);
   const [tableData, setTableData] = useState([]);
@@ -81,16 +83,18 @@ const UserProfile = () => {
 
   const [map, setMap] = useState(null);
 
+  useRedirectToLogin()
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(multiplierUrl);
-        
-       
+
         const mapData = response.data;
+        console.log("mulipler: ", mapData);
         setMap(mapData);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        console.error("Error fetching data:", error.message);
       }
     };
 
@@ -108,7 +112,7 @@ const UserProfile = () => {
       },
     ],
   };
-  
+
   // console.log("chatData:" , tableData);
   const {
     getTableBodyProps,
@@ -132,42 +136,41 @@ const UserProfile = () => {
   );
 
   useEffect(() => {
+      axios
+        .post(`${backend_url}/api/v1/user/buy/details`, {
+          token: localStorage.getItem("icell_pitcher_code")?.slice(1, -1),
+        })
+        .then(({ data }) => {
+          setBoughtStocks(data.buyStartupStocks);
+          setStartupNames(data.startupsName);
 
-   
+          let table = [];
+          let len = data.buyStartupStocks.length;
+          var total = 0;
+          for (let i = 0; i < len; i++) {
+            var m = 0;
+            var n = data.startupsName[i];
+            if (map != null) m = map[n];
 
-    axios
-      .post(`${backend_url}/api/v1/user/buy/details`, {
-        token: localStorage.getItem("icell_pitcher_code").slice(1, -1),
-      })
-      .then(({ data }) => {
-        setBoughtStocks(data.buyStartupStocks);
-        setStartupNames(data.startupsName);
-
-        let table = [];
-        let len = data.buyStartupStocks.length;
-        var total=0;
-        for (let i = 0; i < len; i++) {
-          var m = 0
-          var n = data.startupsName[i]
-          if(map!=null) m = map[n]
-        
-          const quant = data.buyStartupStocks[i]
-          var n = data.startupsName[0]
-          const curr = data.buyStartupStocks[i] * m
-          table.push({
-            sno: i+1,
-            startup: data.startupsName[i],
-            quantity: quant,
-            // percent: 94,
-            multiplier: m,
-            worth: curr
-          })
-          total  = total + curr;
-         
-        }
-        setTotalWorth(total)
-        setTableData(table);
-      });
+            const quant = data.buyStartupStocks[i];
+            var n = data.startupsName[0];
+            const curr = data.buyStartupStocks[i] * m;
+            table.push({
+              sno: i + 1,
+              startup: data.startupsName[i],
+              quantity: quant,
+              // percent: 94,
+              multiplier: m,
+              worth: curr,
+            });
+            total = total + curr;
+          }
+          setTotalWorth(total);
+          setTableData(table);
+        })
+      .catch((err) => {
+        console.log("userprofile error",err);
+      }) 
   }, [map]);
   return (
     <div className="user-profile">
