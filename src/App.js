@@ -17,10 +17,8 @@ function App() {
 
   useEffect(() => {
     // Update navChange based on the current route
-    setNavChange(location.pathname !== "/");
+    setNavChange(location.pathname !== "/" && location.pathname !== "/Login");
   }, [location]);
-
-  //  && location.pathname !== "/Login"
 
   return (
     <div className="App">
