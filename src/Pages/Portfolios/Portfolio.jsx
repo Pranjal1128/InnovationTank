@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaUserCircle } from "react-icons/fa";
 import { GiReceiveMoney } from "react-icons/gi";
 import { FaDiagramProject } from "react-icons/fa6";
+import { useRedirectToLogin } from '../../customHooks/useRedirectToLogin';
 
 function Portfolio() {
   const [allProjects, setAllProjects] = useState([{name : "name",leader:"leader",about:"about"}]);
@@ -14,6 +15,8 @@ function Portfolio() {
 
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.portfolio);
+
+  useRedirectToLogin();
 
   // Corrected function to handle the click event with the project ID
   const handleSubmit = (id) => {

@@ -109,7 +109,7 @@ const BuyPage = () => {
     setCarouselItems([
       <LineChart1 portfolio_id={id} socket={socket} />,
       comp1(),
-      comp2(),
+  
     ]);
     return () => {
       console.log("socket disconnecg");
@@ -133,7 +133,14 @@ const BuyPage = () => {
         }
       }
     }
+
   }, [id]);
+
+  useEffect(()=>{    setCarouselItems([
+    <LineChart1 portfolio_id={id} socket={socket} />,
+    comp1(),
+
+  ]);},[bio])
 
   // const carouselItems = [<LineChart1 socket={socket} /> ,comp1(), comp2()];
 

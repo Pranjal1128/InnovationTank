@@ -6,6 +6,8 @@ import { backend_url } from "../../config";
 import { useState } from "react";
 import axios, { all } from "axios";
 import Loader from "../Loader/Loader"
+import { useRedirectToLogin } from "../../customHooks/useRedirectToLogin";
+import { useNavigate } from "react-router-dom";
 
 // Example of how to use the functions
 
@@ -26,6 +28,8 @@ const columns = [
 ];
 
 const AudienceRanking = () => {
+
+  const navigate = useNavigate();
   const [audienceRank, setAudienceRank] = useState([]);
   const [allAudienceRanks, setAllAudienceRanks] = useState([]);
   const [currUser, setcurrUser] = useState();
@@ -35,7 +39,8 @@ const AudienceRanking = () => {
   const [loading, setLoading] = useState(false);
   const [manageFetechReq, setManageFetechReq] = useState([1]);
   
-
+  // if not loged in then redirect to login
+  useRedirectToLogin()
 
   
   const {
@@ -99,7 +104,6 @@ const AudienceRanking = () => {
       return res;
     } catch (error) {
       console.error("Error fetching audience ranking:", error.message);
-      throw error;
     }
   };
 
@@ -114,7 +118,7 @@ const AudienceRanking = () => {
       console.log("currUser")
     } catch (error) {
       console.error("Error fetching current user's rank:", error.message);
-      throw error;
+      navigate("/Login")
     }
   };
 
