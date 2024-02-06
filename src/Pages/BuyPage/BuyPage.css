@@ -49,7 +49,7 @@ margin-top: 25px;
 
 .buy-amount::placeholder {
     color: #6c37f3 ; /* Change this to the desired darkened color */
-  }
+}
 
 .buy-page-input button {
     background-color: #5a419b;
@@ -86,10 +86,10 @@ margin-top: 25px;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 1.5rem;
 }
 
-.buy-page-input p input[type="number"] {
-    
+.buy-page-input p input[type="number"] { 
     margin-right: 5px;
     text-align: center;
     font-size: 16px;
