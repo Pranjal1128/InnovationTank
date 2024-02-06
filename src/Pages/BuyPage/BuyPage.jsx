@@ -11,9 +11,7 @@ import { io } from "socket.io-client";
 import { backend_url } from "../../config";
 import { useMyDetails } from "../../customHooks/useMyDetails";
 
-const comp2 = () => {
-  return <p>hi there.</p>;
-};
+
 
 let socket;
 let userId;
@@ -137,7 +135,10 @@ const BuyPage = () => {
   }, [id]);
 
   useEffect(()=>{    setCarouselItems([
-    <LineChart1 portfolio_id={id} socket={socket} />,
+    <div className="LineChart">
+ <LineChart1 portfolio_id={id} socket={socket} />
+    </div>
+   ,
     comp1(),
 
   ]);},[bio])
