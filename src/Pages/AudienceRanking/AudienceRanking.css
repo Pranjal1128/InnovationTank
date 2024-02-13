@@ -50,6 +50,9 @@
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
 }
+.audience-ranking > table  tr {
+    height: 10px !important;
+}
 
 .audience-ranking-table th:first-of-type {
     border-top-left-radius: 10px;

@@ -79,33 +79,17 @@ const UserProfile = () => {
   const [startupNames, setStartupNames] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [totalWorth, setTotalWorth] = useState();
-  const multiplierUrl = `${backend_url}/portfolios/multiplier`;
 
-  const [map, setMap] = useState(null);
 
-  useRedirectToLogin()
+  useRedirectToLogin();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(multiplierUrl);
 
-        const mapData = response.data;
-        console.log("mulipler: ", mapData);
-        setMap(mapData);
-      } catch (error) {
-        console.error("Error fetching data:", error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const chartData = {
     labels: startupNames, // total startup name
     datasets: [
       {
-        label: "Bar Chart ",
+        label: "Bought Stock ",
         data: boughtStocks, //bought stock
         backgroundColor: generateRandomColor(startupNames.length),
         hoverOffset: 4,
@@ -136,42 +120,38 @@ const UserProfile = () => {
   );
 
   useEffect(() => {
-      axios
-        .post(`${backend_url}/api/v1/user/buy/details`, {
-          token: localStorage.getItem("icell_pitcher_code")?.slice(1, -1),
-        })
-        .then(({ data }) => {
-          setBoughtStocks(data.buyStartupStocks);
-          setStartupNames(data.startupsName);
+    axios
+      .post(`${backend_url}/api/v1/user/buy/details`, {
+        token: localStorage.getItem("icell_pitcher_code")?.slice(1, -1),
+      })
+      .then(({ data }) => {
+        setBoughtStocks(data.buyStartupStocks);
+        setStartupNames(data.startupsName);
+        let multiplierArr = data.multiplier;
+        let table = [];
+        let len = data.buyStartupStocks.length;
+        var total = 0;
+        for (let i = 0; i < len; i++) {
 
-          let table = [];
-          let len = data.buyStartupStocks.length;
-          var total = 0;
-          for (let i = 0; i < len; i++) {
-            var m = 0;
-            var n = data.startupsName[i];
-            if (map != null) m = map[n];
-
-            const quant = data.buyStartupStocks[i];
-            var n = data.startupsName[0];
-            const curr = data.buyStartupStocks[i] * m;
-            table.push({
-              sno: i + 1,
-              startup: data.startupsName[i],
-              quantity: quant,
-              // percent: 94,
-              multiplier: m,
-              worth: curr,
-            });
-            total = total + curr;
-          }
-          setTotalWorth(total);
-          setTableData(table);
-        })
+          const quant = data.buyStartupStocks[i];
+          const curr = data.buyStartupStocks[i] * multiplierArr[i];
+          table.push({
+            sno: i + 1,
+            startup: data.startupsName[i],
+            quantity: quant,
+            // percent: 94,
+            multiplier: multiplierArr[i],
+            worth: curr,
+          });
+          total = total + curr;
+        }
+        setTotalWorth(total);
+        setTableData(table);
+      })
       .catch((err) => {
-        console.log("userprofile error",err);
-      }) 
-  }, [map]);
+        console.log("userprofile error", err);
+      });
+  }, []);
   return (
     <div className="user-profile">
       <h1>Your Profile</h1>

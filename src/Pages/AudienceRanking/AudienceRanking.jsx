@@ -27,6 +27,7 @@ const columns = [
   },
 ];
 
+
 const AudienceRanking = () => {
 
   const navigate = useNavigate();

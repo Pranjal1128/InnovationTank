@@ -73,7 +73,7 @@ const ParticipantRanking = () => {
     labels: startupNames, // total startup name
     datasets: [
       {
-        label: "Histogram ",
+        label: "Sold Stocks ",
         data: soldStocks, //sold stocks
         backgroundColor: generateRandomColor(
           startupNames ? startupNames.length : 0
